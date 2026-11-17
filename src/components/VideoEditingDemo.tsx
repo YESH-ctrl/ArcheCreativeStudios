@@ -562,8 +562,8 @@ export function VideoEditingDemo({
                     borderColor: isHighlighted
                       ? "var(--accent-deep)"
                       : isPast
-                      ? "rgba(12, 12, 13, 0.4)"
-                      : "var(--line)",
+                        ? "rgba(12, 12, 13, 0.4)"
+                        : "var(--line)",
                     background: isHighlighted
                       ? "color-mix(in srgb, var(--accent-deep) 15%, var(--card))"
                       : "var(--card)",
@@ -607,86 +607,86 @@ export function VideoEditingDemo({
             onPointerMove={handlePointerMove}
             data-slab="grain"
             className="vd-track relative h-[40px] flex-1 cursor-ew-resize rounded-[4px] border overflow-hidden p-[2px] touch-none"
-          style={{
-            borderColor: isScrubbing ? "var(--accent-deep)" : "var(--line)",
-            background: "var(--bg-2)",
-          }}
-          data-cursor="DRAG"
-          role="slider"
-          tabIndex={0}
-          aria-label="Video timeline scrubber"
-          aria-valuemin={0}
-          aria-valuemax={STAGES.length - 1}
-          aria-valuenow={stageIndex}
-          aria-valuetext={currentStage.label}
-          onKeyDown={(e) => {
-            if (e.key === "Home") {
-              e.preventDefault();
-              takeOver();
-              applyPos(0);
-            } else if (e.key === "End") {
-              e.preventDefault();
-              takeOver();
-              applyPos(1);
-            } else if (e.key === "ArrowRight") {
-              e.preventDefault();
-              takeOver();
-              applyPos(Math.min(1, posRef.current + 1 / LAST));
-            } else if (e.key === "ArrowLeft") {
-              e.preventDefault();
-              takeOver();
-              applyPos(Math.max(0, posRef.current - 1 / LAST));
-            }
-          }}
-        >
-          {/* Waveform: one faint bed, one lime copy clipped to the playhead.
-              Both read the same `--ph` value, so the sweep is continuous. */}
-          {[false, true].map((played) => (
-            <svg
-              key={played ? "played" : "bed"}
-              className={`absolute inset-0 h-full w-full ${played ? "vd-wave-played" : ""}`}
-              preserveAspectRatio="none"
-              viewBox="0 0 300 40"
-              aria-hidden
-            >
-              {Array.from({ length: 48 }).map((_, i) => {
-                const height = 6 + ((i * 23) % 24);
-                const x = i * 6.3 + 3;
-                return (
-                  <line
-                    key={i}
-                    x1={x}
-                    y1={20 - height / 2}
-                    x2={x}
-                    y2={20 + height / 2}
-                    stroke={played ? "var(--accent-deep)" : "var(--faint)"}
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    opacity={played ? 1 : 0.4}
-                  />
-                );
-              })}
-            </svg>
-          ))}
-
-          {/* Draggable Playhead */}
-          <div
-            className="vd-playhead pointer-events-none absolute top-0 bottom-0 w-[2px]"
             style={{
-              background: "var(--accent-deep)",
-              boxShadow: "0 0 8px var(--accent-deep)",
+              borderColor: isScrubbing ? "var(--accent-deep)" : "var(--line)",
+              background: "var(--bg-2)",
+            }}
+            data-cursor="DRAG"
+            role="slider"
+            tabIndex={0}
+            aria-label="Video timeline scrubber"
+            aria-valuemin={0}
+            aria-valuemax={STAGES.length - 1}
+            aria-valuenow={stageIndex}
+            aria-valuetext={currentStage.label}
+            onKeyDown={(e) => {
+              if (e.key === "Home") {
+                e.preventDefault();
+                takeOver();
+                applyPos(0);
+              } else if (e.key === "End") {
+                e.preventDefault();
+                takeOver();
+                applyPos(1);
+              } else if (e.key === "ArrowRight") {
+                e.preventDefault();
+                takeOver();
+                applyPos(Math.min(1, posRef.current + 1 / LAST));
+              } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                takeOver();
+                applyPos(Math.max(0, posRef.current - 1 / LAST));
+              }
             }}
           >
-            {/* Playhead Grab Notch */}
+            {/* Waveform: one faint bed, one lime copy clipped to the playhead.
+              Both read the same `--ph` value, so the sweep is continuous. */}
+            {[false, true].map((played) => (
+              <svg
+                key={played ? "played" : "bed"}
+                className={`absolute inset-0 h-full w-full ${played ? "vd-wave-played" : ""}`}
+                preserveAspectRatio="none"
+                viewBox="0 0 300 40"
+                aria-hidden
+              >
+                {Array.from({ length: 48 }).map((_, i) => {
+                  const height = 6 + ((i * 23) % 24);
+                  const x = i * 6.3 + 3;
+                  return (
+                    <line
+                      key={i}
+                      x1={x}
+                      y1={20 - height / 2}
+                      x2={x}
+                      y2={20 + height / 2}
+                      stroke={played ? "var(--accent-deep)" : "var(--faint)"}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      opacity={played ? 1 : 0.4}
+                    />
+                  );
+                })}
+              </svg>
+            ))}
+
+            {/* Draggable Playhead */}
             <div
-              data-slab="signal"
-              className="absolute -top-[2px] left-1/2 h-[10px] w-[10px] -translate-x-1/2 rounded-full border border-black"
-              style={{ background: "var(--accent)" }}
-            />
+              className="vd-playhead pointer-events-none absolute top-0 bottom-0 w-[2px]"
+              style={{
+                background: "var(--accent-deep)",
+                boxShadow: "0 0 8px var(--accent-deep)",
+              }}
+            >
+              {/* Playhead Grab Notch */}
+              <div
+                data-slab="signal"
+                className="absolute -top-[2px] left-1/2 h-[10px] w-[10px] -translate-x-1/2 rounded-full border border-black"
+                style={{ background: "var(--accent)" }}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       {/* Bottom Stage Progress Steps Bar (replaces static RAW -> STORY) */}
       <div
@@ -707,8 +707,8 @@ export function VideoEditingDemo({
                   color: isCurrent
                     ? "var(--accent-deep)"
                     : isPassed
-                    ? "var(--fg)"
-                    : "var(--faint)",
+                      ? "var(--fg)"
+                      : "var(--faint)",
                   fontWeight: isCurrent ? 600 : 400,
                 }}
               >
