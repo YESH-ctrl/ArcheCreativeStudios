@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 import { getLenis } from "../motion/SmoothScroll";
 
@@ -35,6 +35,22 @@ export function Intro() {
   const dotRef = useRef<HTMLSpanElement>(null);
   const [visible, setVisible] = useState(() => isIntroActive());
 
+  // Synchronously lock page styles before paint to guarantee zero FOUC / double-flash
+  useLayoutEffect(() => {
+    if (!visible) return;
+    document.documentElement.classList.add("arche-intro-loading");
+    document.body.classList.add("arche-intro-loading");
+
+    if (!prefersReducedMotion()) {
+      gsap.set(".intro-layer-a", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
+      gsap.set(".intro-layer-c", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
+      gsap.set(".intro-layer-full", { opacity: 0 });
+      if (dotRef.current) gsap.set(dotRef.current, { y: -100, opacity: 0, scale: 1 });
+      gsap.set(".intro-char", { yPercent: 120 });
+      if (logoGroup.current) gsap.set(logoGroup.current, { y: 0, opacity: 1 });
+    }
+  }, [visible]);
+
   useEffect(() => {
     if (!visible) {
       document.documentElement.classList.remove("arche-intro-loading");
@@ -45,7 +61,7 @@ export function Intro() {
       return;
     }
 
-    // Set loading class on root to keep page background ink and page content hidden
+    // Ensure loading class is present
     document.documentElement.classList.add("arche-intro-loading");
     document.body.classList.add("arche-intro-loading");
 
@@ -211,7 +227,7 @@ export function Intro() {
         0.85
       );
 
-      // Step 4: t0.88 to 1.40: wordmark "Arche Creative Studios" rises letter by letter from masks
+      // Step 4: t0.50 to 0.92: wordmark "Arche Creative Studios" rises letter by letter alongside monogram
       tl.fromTo(
         ".intro-char",
         {
@@ -220,25 +236,25 @@ export function Intro() {
         {
           yPercent: 0,
           duration: 0.38,
-          stagger: 0.022,
+          stagger: 0.018,
           ease: "expo.out",
         },
-        0.88
+        0.50
       );
 
-      // Step 5: t1.15 to 1.40: trailing wordmark accent square settles beside wordmark
+      // Step 5: t0.92 to 1.10: trailing wordmark accent square settles beside wordmark
       tl.to(
         dotRef.current,
         {
           y: 0,
           opacity: 1,
-          duration: 0.35,
+          duration: 0.28,
           ease: "back.out(1.6)",
         },
-        1.15
+        0.92
       );
 
-      // Step 6: t1.65 to 1.95: logo group moves up 24px and fades out
+      // Step 6: t1.60 to 1.90: logo group moves up 24px and fades out
       tl.to(
         logoGroup.current,
         {
@@ -247,10 +263,10 @@ export function Intro() {
           duration: 0.3,
           ease: "power2.in",
         },
-        1.65
+        1.60
       );
 
-      // t1.9 to 2.9: ARCH APERTURE
+      // t1.85 to 2.85: ARCH APERTURE
       tl.to(
         aperture,
         {
@@ -277,7 +293,7 @@ export function Intro() {
             setVisible(false);
           },
         },
-        1.9
+        1.85
       );
 
       // t2.2: Hero reveal starts during aperture
@@ -338,6 +354,7 @@ export function Intro() {
             src="/arche-logo-a.png"
             alt="Arche Logo A"
             className="intro-layer-a absolute inset-0 w-full h-full object-contain pointer-events-none"
+            style={{ opacity: 0 }}
           />
 
           {/* Layer 2: Monogram C */}
@@ -345,6 +362,7 @@ export function Intro() {
             src="/arche-logo-c.png"
             alt="Arche Logo C"
             className="intro-layer-c absolute inset-0 w-full h-full object-contain pointer-events-none"
+            style={{ opacity: 0 }}
           />
 
           {/* Layer 3: Complete Monogram */}
@@ -372,7 +390,12 @@ export function Intro() {
           >
             {"Arche Creative Studios".split("").map((char, i) => (
               <span key={i} className="inline-block overflow-hidden" style={{ verticalAlign: "bottom" }}>
-                <span className="intro-char inline-block">
+                <span
+                  className="intro-char inline-block"
+                  style={{
+                    transform: prefersReducedMotion() ? "none" : "translateY(120%)",
+                  }}
+                >
                   {char === " " ? "\u00A0" : char}
                 </span>
               </span>
@@ -382,7 +405,7 @@ export function Intro() {
           {/* Lime dot falling from above beside wordmark */}
           <span
             ref={dotRef}
-            className="intro-dot inline-block flex-shrink-0"
+            className="intro-dot intro-layer-dot inline-block flex-shrink-0"
             style={{
               width: "clamp(6px, 0.9vw, 10px)",
               height: "clamp(6px, 0.9vw, 10px)",
@@ -390,7 +413,8 @@ export function Intro() {
               alignSelf: "flex-start",
               marginTop: "clamp(4px, 0.7vw, 8px)",
               transformOrigin: "50% 100%",
-              opacity: 0,
+              opacity: prefersReducedMotion() ? 1 : 0,
+              transform: prefersReducedMotion() ? "none" : "translateY(-100px)",
             }}
           />
         </div>

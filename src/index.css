@@ -87,8 +87,33 @@ html.arche-intro-loading body {
   overflow: hidden;
 }
 
+html.arche-intro-loading header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 html.arche-intro-loading #hero-aperture-wrap {
   clip-path: inset(100% 50% 0 50% round 0px 0px 0 0);
+}
+
+/* Intro preloader initial hidden states — guarantees zero FOUC / double flash */
+.intro-layer-a,
+.intro-layer-c,
+.intro-layer-full {
+  opacity: 0;
+}
+
+.intro-char {
+  display: inline-block;
+  transform: translateY(120%);
+  will-change: transform;
+}
+
+.intro-dot,
+.intro-layer-dot {
+  opacity: 0;
+  transform: translateY(-100px);
+  will-change: transform, opacity;
 }
 
 body {

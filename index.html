@@ -14,6 +14,13 @@
   <meta property="og:description"
     content="Video Production · Pitch Decks · Web Development · AI Solutions. Technology Meets Creativity." />
   <meta property="og:type" content="website" />
+  <script>
+    try {
+      if (!sessionStorage.getItem("arche_intro")) {
+        document.documentElement.classList.add("arche-intro-loading");
+      }
+    } catch (e) {}
+  </script>
 </head>
 
 <body>
