@@ -1,6 +1,7 @@
 import { siteContent } from "../data/site";
 import { Wordmark } from "./Wordmark";
 import { Link } from "../lib/router";
+import { WhatsAppChatButton } from "./WhatsAppChatButton";
 
 export function Footer() {
   const f = siteContent.footer;
@@ -44,7 +45,8 @@ export function Footer() {
                 {siteContent.contact.phone}
               </a>
             )}
-            <Link to="/contact" className="btn btn-ghost mt-[8px] self-start" data-cursor="START" style={{ borderColor: "var(--line)", color: "var(--fg)" }}>
+            <WhatsAppChatButton size="small" className="self-start mt-[2px]" />
+            <Link to="/contact" className="btn btn-ghost mt-[6px] self-start" data-cursor="START" style={{ borderColor: "var(--line)", color: "var(--fg)" }}>
               Start <span className="arw">→</span>
             </Link>
           </div>

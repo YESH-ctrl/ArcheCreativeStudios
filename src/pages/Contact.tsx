@@ -3,6 +3,7 @@ import { STUDIO_INFO } from "../data/services";
 import { submitContactEnquiry, mailtoFallbackUrl, type ContactFormPayload } from "../lib/inquiries";
 import { usePage } from "../lib/router";
 import { useReveal } from "../lib/reveal";
+import { WhatsAppChatButton } from "../components/WhatsAppChatButton";
 
 const SERVICE_OPTIONS = [
   "Video Production & Editing",
@@ -153,7 +154,7 @@ export function ContactPage() {
                 <p className="text-[16px] text-[var(--fg)] max-w-[54ch] leading-relaxed">
                   Thank you for reaching out to ARCHE! Your project enquiry has been received. Our team will get in touch with you shortly.
                 </p>
-                <div className="pt-[16px] border-t border-[var(--line)]">
+                <div className="pt-[16px] border-t border-[var(--line)] flex flex-wrap items-center gap-[14px]">
                   <button
                     onClick={() => {
                       setStatus("idle");
@@ -168,6 +169,7 @@ export function ContactPage() {
                   >
                     Send Another Message <span className="arw">→</span>
                   </button>
+                  <WhatsAppChatButton size="small" />
                 </div>
               </div>
             ) : status === "unconfigured" ? (
@@ -188,6 +190,7 @@ export function ContactPage() {
                   >
                     Open in Email Client <span className="arw">→</span>
                   </a>
+                  <WhatsAppChatButton size="medium" />
                   <button
                     onClick={() => setStatus("idle")}
                     className="btn btn-ghost text-[11px]"
@@ -359,28 +362,38 @@ export function ContactPage() {
                 </div>
 
                 {/* Submit Action */}
-                <div className="pt-[10px] flex flex-wrap items-center justify-between gap-[16px]">
-                  <button
-                    type="submit"
-                    disabled={status === "submitting"}
-                    className="btn"
-                    data-cursor="SEND"
-                  >
-                    {status === "submitting" ? (
-                      <>
-                        <span className="inline-block h-[10px] w-[10px] animate-spin rounded-full border-2 border-t-transparent border-[var(--bg)]" />
-                        <span>Sending Enquiry…</span>
-                      </>
-                    ) : (
-                      <>
-                        Send Project Enquiry <span className="arw">→</span>
-                      </>
-                    )}
-                  </button>
+                <div className="pt-[10px] space-y-[18px]">
+                  <div className="flex flex-wrap items-center justify-between gap-[16px]">
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="btn"
+                      data-cursor="SEND"
+                    >
+                      {status === "submitting" ? (
+                        <>
+                          <span className="inline-block h-[10px] w-[10px] animate-spin rounded-full border-2 border-t-transparent border-[var(--bg)]" />
+                          <span>Sending Enquiry…</span>
+                        </>
+                      ) : (
+                        <>
+                          Send Project Enquiry <span className="arw">→</span>
+                        </>
+                      )}
+                    </button>
 
-                  <span className="font-mono text-[10px] text-[var(--muted)]">
-                    Direct reply within 1 business day
-                  </span>
+                    <span className="font-mono text-[10px] text-[var(--muted)]">
+                      Direct reply within 1 business day
+                    </span>
+                  </div>
+
+                  {/* Instant WhatsApp Option */}
+                  <div className="flex flex-wrap items-center justify-between gap-[12px] pt-[14px] border-t border-[var(--line)]">
+                    <span className="font-mono text-[11px] text-[var(--muted)] uppercase tracking-wide">
+                      Prefer instant chat?
+                    </span>
+                    <WhatsAppChatButton size="small" />
+                  </div>
                 </div>
               </form>
             )}
@@ -425,6 +438,19 @@ export function ContactPage() {
                 >
                   {STUDIO_INFO.phone}
                 </a>
+              </div>
+
+              {/* Chat on WhatsApp Button */}
+              <div className="border-t border-[var(--line)] pt-[16px] space-y-[10px]">
+                <span className="font-mono text-[10px] text-[var(--muted)] uppercase block">
+                  Chat on WhatsApp
+                </span>
+                <div>
+                  <WhatsAppChatButton size="medium" />
+                </div>
+                <p className="font-mono text-[9.5px] text-[var(--muted)]">
+                  Instant messaging · Direct connection with the studio team
+                </p>
               </div>
 
               {/* Website */}
