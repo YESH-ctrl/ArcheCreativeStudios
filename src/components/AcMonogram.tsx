@@ -4,7 +4,7 @@ export interface AcMonogramProps {
   size?: number;
   className?: string;
   style?: React.CSSProperties;
-  /** When true, renders directly on dark surfaces using screen mix-blend */
+  /** When true, renders directly on dark surfaces */
   onDark?: boolean;
 }
 
@@ -12,8 +12,8 @@ export interface AcMonogramProps {
  * ARCHÉ — AC Monogram Brand Symbol
  *
  * Source artwork referenced directly as public asset `/arche logo.jpeg`:
- * - Native artwork aspect ratio: 1400w / 1181h = 1.1854:1
- * - Preserves 100% of original geometry, stroke weights, neon lime arc, ivory ribbons, and textures.
+ * - Native artwork aspect ratio: 310w / 234h = 1.325:1
+ * - Pure transparent background: only the A and C letterforms.
  * - Static wherever it appears outside the preloader.
  */
 export function AcMonogram({
@@ -22,18 +22,12 @@ export function AcMonogram({
   style,
   onDark = false,
 }: AcMonogramProps) {
-  const width = Math.round(size * 1.1854);
+  const width = Math.round(size * (310 / 234));
   const height = size;
 
-  // On dark surfaces (like footer or preloader), screen mix-blend mode enables the dark charcoal
-  // ground of the image to seamlessly blend with the dark page canvas.
-  // On light surfaces (like the header), a subtle dark pill container preserves the glowing neon
-  // colors and ivory ribbons without altering any pixels of the source artwork.
   return (
     <span
-      className={`ac-monogram-wrap inline-flex items-center justify-center select-none ${
-        onDark ? "" : "bg-[#0c0c0d] rounded-[5px] px-[3px] py-[2px] shadow-sm"
-      } ${className}`}
+      className={`ac-monogram-wrap inline-flex items-center justify-center select-none ${className}`}
       style={{
         verticalAlign: "middle",
         ...style,
@@ -50,16 +44,11 @@ export function AcMonogram({
         <img
           src="/arche%20logo.jpeg"
           alt="Arche AC Monogram"
-          className="absolute pointer-events-none max-w-none select-none"
-          style={{
-            width: `${(2048 / 1400) * 100}%`,
-            height: "auto",
-            left: `${(-368 / 1400) * 100}%`,
-            top: `${(-429 / 1400) * 100}%`,
-            mixBlendMode: "screen",
-          }}
+          className="w-full h-full object-contain pointer-events-none select-none"
+          style={!onDark ? { filter: "brightness(0.1)" } : undefined}
         />
       </span>
     </span>
   );
 }
+

@@ -9,8 +9,8 @@ export function Footer() {
     <footer className="on-ink w-full border-t" style={{ borderColor: "var(--line)" }}>
       <div className="wrap py-[clamp(40px,4.6vw,70px)]">
         <div className="grid gap-[32px] md:grid-cols-12">
-          <div className="flex flex-col gap-[12px] md:col-span-5">
-            <Wordmark size={22} onDark={true} />
+          <div className="flex flex-col gap-[14px] md:col-span-5">
+            <Wordmark size={36} monogramScale={1.35} onDark={true} />
             <p className="mono max-w-[30ch]">{f.note}</p>
             <p className="body-s max-w-[36ch]">{siteContent.brand.line}</p>
           </div>
@@ -36,10 +36,15 @@ export function Footer() {
             <p className="mono" style={{ color: "var(--accent-ink)" }}>
               Contact
             </p>
-            <a href="mailto:hello@arche.studio" className="body-s lnk self-start">
-              hello@arche.studio
+            <a href={`mailto:${siteContent.contact.email}`} className="body-s lnk self-start">
+              {siteContent.contact.email}
             </a>
-            <Link to="/contact" className="btn btn-ghost mt-[8px] self-start" cursor="START" style={{ borderColor: "var(--line)", color: "var(--fg)" }}>
+            {siteContent.contact.phone && (
+              <a href={`tel:${siteContent.contact.phone.replace(/\s+/g, "")}`} className="body-s lnk self-start text-[var(--muted)]">
+                {siteContent.contact.phone}
+              </a>
+            )}
+            <Link to="/contact" className="btn btn-ghost mt-[8px] self-start" data-cursor="START" style={{ borderColor: "var(--line)", color: "var(--fg)" }}>
               Start <span className="arw">→</span>
             </Link>
           </div>
@@ -65,7 +70,7 @@ export function Footer() {
 
       <div className="wrap flex flex-wrap items-center justify-between gap-[10px] border-t py-[18px]" style={{ borderColor: "var(--line)" }}>
         <p className="mono">{f.legal}</p>
-        <p className="mono">We build systems.</p>
+        <p className="mono">Technology Meets Creativity</p>
       </div>
     </footer>
   );

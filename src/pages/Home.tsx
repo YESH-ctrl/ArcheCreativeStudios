@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Hero, FinalCTA } from "../components/Sections";
+import { Hero } from "../components/Sections";
 import { HowWeWork } from "../components/HowWeWork";
 import { Chapters } from "../components/Chapters";
 import { WorkIndex } from "../components/WorkIndex";
@@ -30,7 +30,7 @@ import { resetPreviews } from "../lib/autoplay";
  *  Start         fragments converge into Arche                       (L4)
  */
 export function Home() {
-  usePage("Arche — AI + Digital Systems Studio");
+  usePage("Arche Creative Studios");
   useReveal();
   useParallax();
 
@@ -80,9 +80,6 @@ export function Home() {
       </div>
       <div data-chapter="FAQ">
         <FAQ />
-      </div>
-      <div data-chapter="Start">
-        <FinalCTA />
       </div>
       <ProgressRail />
       <BridgeDot />

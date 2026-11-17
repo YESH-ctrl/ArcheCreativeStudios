@@ -115,7 +115,6 @@ export function Intro() {
         gsap.set(".intro-layer-full", { opacity: 1 });
         gsap.set(".intro-layer-a", { opacity: 0 });
         gsap.set(".intro-layer-c", { opacity: 0 });
-        gsap.set(".intro-layer-dot", { opacity: 0 });
         gsap.set(".intro-char", { yPercent: 0 });
         gsap.set(dotRef.current, { y: 0, opacity: 1, scale: 1 });
         gsap.set(logoGroup.current, { y: 0, opacity: 1 });
@@ -170,65 +169,49 @@ export function Intro() {
         return;
       }
 
-      // Initial states for sequential pixel reveal of original artwork:
-      // 1. Reveal A smoothly first
-      // 2. Once A is established, reveal C in its exact position and overlap
-      // 3. Reveal central lime dot last, along with any remaining source detail
+      // Initial states for sequential reveal of A and C
       gsap.set(".intro-layer-a", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
-      gsap.set(".intro-layer-c", { opacity: 0, clipPath: "polygon(50.14% 0%, 50.14% 0%, 50.14% 100%, 50.14% 100%)" });
-      gsap.set(".intro-layer-dot", { opacity: 0, scale: 0, transformOrigin: "69.25% 56.65%" });
+      gsap.set(".intro-layer-c", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
       gsap.set(".intro-layer-full", { opacity: 0 });
-      gsap.set(dotRef.current, { y: -120, opacity: 0, scaleX: 1, scaleY: 1 });
+      gsap.set(dotRef.current, { y: -100, opacity: 0, scale: 1 });
       gsap.set(".intro-char", { yPercent: 120 });
       gsap.set(logoGroup.current, { y: 0, opacity: 1 });
 
-      // Step 1: t0.0 to 0.45 — Reveal A smoothly first (wipe left-to-right across A's pixels)
+      // Step 1: t0.0 to 0.45 — Reveal A smoothly first (wipe left-to-right across A)
       tl.to(
         ".intro-layer-a",
         {
           opacity: 1,
-          clipPath: "polygon(0% 0%, 50.14% 0%, 50.14% 100%, 0% 100%)",
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           duration: 0.45,
           ease: "power2.out",
         },
         0.0
       );
 
-      // Step 2: t0.48 to 0.88 — Once A is established, reveal C in its exact position and overlap
+      // Step 2: t0.45 to 0.85 — Once A is established, reveal C smoothly
       tl.to(
         ".intro-layer-c",
         {
           opacity: 1,
-          clipPath: "polygon(50.14% 0%, 100% 0%, 100% 100%, 50.14% 100%)",
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           duration: 0.40,
           ease: "power2.out",
         },
-        0.48
+        0.45
       );
 
-      // Step 3: t0.90 to 1.10 — Reveal central lime dot last (along with remaining source detail)
-      tl.to(
-        ".intro-layer-dot",
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.20,
-          ease: "back.out(2.4)",
-        },
-        0.90
-      );
-
-      // Final complete state: at t1.12, reveal the complete unmasked source artwork
+      // Step 3: at t0.85, reveal complete full monogram
       tl.to(
         ".intro-layer-full",
         {
           opacity: 1,
           duration: 0.05,
         },
-        1.12
+        0.85
       );
 
-      // t0.95 to 1.42: wordmark "Arche" rises letter by letter from masks (yPercent 120 to 0, stagger 0.045, expo.out)
+      // Step 4: t0.88 to 1.40: wordmark "Arche Creative Studios" rises letter by letter from masks
       tl.fromTo(
         ".intro-char",
         {
@@ -236,14 +219,14 @@ export function Intro() {
         },
         {
           yPercent: 0,
-          duration: 0.42,
-          stagger: 0.045,
+          duration: 0.38,
+          stagger: 0.022,
           ease: "expo.out",
         },
-        0.95
+        0.88
       );
 
-      // t1.15 to 1.35: trailing wordmark accent square settles beside wordmark
+      // Step 5: t1.15 to 1.40: trailing wordmark accent square settles beside wordmark
       tl.to(
         dotRef.current,
         {
@@ -255,7 +238,7 @@ export function Intro() {
         1.15
       );
 
-      // t1.65 to 1.95: logo group moves up 24px and fades out
+      // Step 6: t1.65 to 1.95: logo group moves up 24px and fades out
       tl.to(
         logoGroup.current,
         {
@@ -342,131 +325,70 @@ export function Intro() {
         className="relative flex items-center justify-center gap-[clamp(10px,2vw,18px)] select-none px-4"
         style={{ transformOrigin: "50% 50%" }}
       >
-        {/* Exact AC Monogram from source artwork public/arche logo.jpeg with sequential pixel reveal */}
+        {/* Exact AC Monogram from updated source artwork with sequential reveal */}
         <div
           className="intro-ac-monogram relative select-none flex-shrink-0"
           style={{
-            width: Math.round(88 * 1.1854),
-            height: 88,
+            height: "clamp(48px, 6vw, 76px)",
+            width: "calc(clamp(48px, 6vw, 76px) * (310 / 234))",
           }}
         >
-          {/* Layer 1: Monogram A (left half: x <= 50.14%) */}
-          <div
-            className="intro-layer-a absolute inset-0 overflow-hidden"
-            style={{
-              clipPath: "polygon(0% 0%, 50.14% 0%, 50.14% 100%, 0% 100%)",
-            }}
-          >
-            <img
-              src="/arche%20logo.jpeg"
-              alt="Arche AC Monogram - Layer A"
-              className="absolute pointer-events-none max-w-none"
-              style={{
-                width: `${(2048 / 1400) * 100}%`,
-                height: "auto",
-                left: `${(-368 / 1400) * 100}%`,
-                top: `${(-429 / 1400) * 100}%`,
-                mixBlendMode: "screen",
-              }}
-            />
-          </div>
+          {/* Layer 1: Monogram A */}
+          <img
+            src="/arche-logo-a.png"
+            alt="Arche Logo A"
+            className="intro-layer-a absolute inset-0 w-full h-full object-contain pointer-events-none"
+          />
 
-          {/* Layer 2: Monogram C (right half: x >= 50.14%, excluding central lime dot) */}
-          <div
-            className="intro-layer-c absolute inset-0 overflow-hidden"
-            style={{
-              clipPath: "polygon(50.14% 0%, 100% 0%, 100% 100%, 50.14% 100%)",
-              WebkitMaskImage: "radial-gradient(circle 8px at 69.25% 56.65%, transparent 95%, black 100%)",
-              maskImage: "radial-gradient(circle 8px at 69.25% 56.65%, transparent 95%, black 100%)",
-            }}
-          >
-            <img
-              src="/arche%20logo.jpeg"
-              alt="Arche AC Monogram - Layer C"
-              className="absolute pointer-events-none max-w-none"
-              style={{
-                width: `${(2048 / 1400) * 100}%`,
-                height: "auto",
-                left: `${(-368 / 1400) * 100}%`,
-                top: `${(-429 / 1400) * 100}%`,
-                mixBlendMode: "screen",
-              }}
-            />
-          </div>
+          {/* Layer 2: Monogram C */}
+          <img
+            src="/arche-logo-c.png"
+            alt="Arche Logo C"
+            className="intro-layer-c absolute inset-0 w-full h-full object-contain pointer-events-none"
+          />
 
-          {/* Layer 3: Central lime dot and remaining source detail (revealed last) */}
-          <div
-            className="intro-layer-dot absolute inset-0 overflow-hidden"
-            style={{
-              clipPath: "circle(6% at 69.25% 56.65%)",
-            }}
-          >
-            <img
-              src="/arche%20logo.jpeg"
-              alt="Arche AC Monogram - Central Dot"
-              className="absolute pointer-events-none max-w-none"
-              style={{
-                width: `${(2048 / 1400) * 100}%`,
-                height: "auto",
-                left: `${(-368 / 1400) * 100}%`,
-                top: `${(-429 / 1400) * 100}%`,
-                mixBlendMode: "screen",
-              }}
-            />
-          </div>
-
-          {/* Layer 4: Complete static source artwork, visible upon animation completion or for reduced motion */}
-          <div
-            className="intro-layer-full absolute inset-0 overflow-hidden"
+          {/* Layer 3: Complete Monogram */}
+          <img
+            src="/arche%20logo.jpeg"
+            alt="Arche Logo"
+            className="intro-layer-full absolute inset-0 w-full h-full object-contain pointer-events-none"
             style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-          >
-            <img
-              src="/arche%20logo.jpeg"
-              alt="Arche AC Monogram - Complete"
-              className="absolute pointer-events-none max-w-none"
-              style={{
-                width: `${(2048 / 1400) * 100}%`,
-                height: "auto",
-                left: `${(-368 / 1400) * 100}%`,
-                top: `${(-429 / 1400) * 100}%`,
-                mixBlendMode: "screen",
-              }}
-            />
-          </div>
+          />
         </div>
 
-        {/* Wordmark "Arche" and falling lime dot */}
+        {/* Wordmark "Arche Creative Studios" and falling lime dot */}
         <div className="flex items-baseline gap-[clamp(6px,1.2vw,12px)]">
           <span
             className="inline-flex items-baseline"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(64px, 8.5vw, 100px)",
+              fontSize: "clamp(24px, 4.2vw, 56px)",
               fontWeight: 600,
-              letterSpacing: "-0.05em",
+              letterSpacing: "-0.04em",
               lineHeight: 1,
               color: "var(--solid-fg)",
+              whiteSpace: "nowrap",
             }}
           >
-            {["A", "r", "c", "h", "e"].map((char, i) => (
+            {"Arche Creative Studios".split("").map((char, i) => (
               <span key={i} className="inline-block overflow-hidden" style={{ verticalAlign: "bottom" }}>
                 <span className="intro-char inline-block">
-                  {char}
+                  {char === " " ? "\u00A0" : char}
                 </span>
               </span>
             ))}
           </span>
 
-          {/* Lime dot falling from 120px above with squash */}
+          {/* Lime dot falling from above beside wordmark */}
           <span
             ref={dotRef}
             className="intro-dot inline-block flex-shrink-0"
             style={{
-              width: 10,
-              height: 10,
+              width: "clamp(6px, 0.9vw, 10px)",
+              height: "clamp(6px, 0.9vw, 10px)",
               background: "var(--accent)",
               alignSelf: "flex-start",
-              marginTop: 10,
+              marginTop: "clamp(4px, 0.7vw, 8px)",
               transformOrigin: "50% 100%",
               opacity: 0,
             }}

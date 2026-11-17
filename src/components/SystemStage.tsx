@@ -42,9 +42,17 @@ export const STAGES: Record<string, (p: StageProps) => ReactElement> = Object.fr
   })
 );
 
+import { PitchDeckDemo } from "./PitchDeckDemo";
+
 /** Video Editing — RAW → SELECT → CUT → MOTION → CAPTIONS → GRADE → EXPORT scrubber (Prompt 09 / Prompt 28). */
 STAGES["video-editing"] = ({ active, preview }: StageProps) => (
   <VideoEditingDemo active={active} preview={preview} />
+);
+STAGES["video-production"] = ({ active, preview }: StageProps) => (
+  <VideoEditingDemo active={active} preview={preview} />
+);
+STAGES["pitch-decks-storytelling"] = ({ active }: StageProps) => (
+  withScenePad(<PitchDeckDemo active={active} />)
 );
 /** Web Development — IDEA → STRUCTURE → INTERFACE → LIVE (Prompt 08 / Prompt 28). */
 STAGES["web-development"] = ({ active, preview }: StageProps) => (
@@ -54,20 +62,34 @@ STAGES["web-development"] = ({ active, preview }: StageProps) => (
 STAGES["ai-automation"] = ({ active, preview }: StageProps) => (
   <AutomationDemo active={active} preview={preview} />
 );
+STAGES["ai-solutions-automation"] = ({ active, preview }: StageProps) => (
+  <AutomationDemo active={active} preview={preview} />
+);
 /** AI Chatbots — three suggested questions; auto-sends first question on view (Prompt 07 / Prompt 28). */
 STAGES["ai-chatbots"] = ({ active, preview }: StageProps) => (
   <AgentDemo active={active} preview={preview} />
 );
 
 /** Stages that bring their own controls: the frame hides its Watch / Try toggle. */
-export const SELF_CONTROLLED = new Set(["video-editing", "web-development", "ai-automation", "ai-chatbots"]);
+export const SELF_CONTROLLED = new Set([
+  "video-editing",
+  "video-production",
+  "pitch-decks-storytelling",
+  "web-development",
+  "ai-automation",
+  "ai-solutions-automation",
+  "ai-chatbots",
+]);
 
 /** In → out token each service turns its input into. */
 const HANDOFF: Record<string, { inn: string; out: string }> = {
   "video-editing": { inn: "RAW", out: "STORY" },
+  "video-production": { inn: "RAW", out: "STORY" },
+  "pitch-decks-storytelling": { inn: "IDEA", out: "PITCH" },
   "web-development": { inn: "VISITOR", out: "LEAD" },
   "ai-chatbots": { inn: "QUESTION", out: "DEMO" },
   "ai-automation": { inn: "EVENT", out: "DONE" },
+  "ai-solutions-automation": { inn: "EVENT", out: "DONE" },
 };
 
 export function DemoToggle({ mode, onChange }: { mode: DemoMode; onChange: (m: DemoMode) => void }) {

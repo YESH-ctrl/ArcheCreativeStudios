@@ -320,7 +320,7 @@ export function Header() {
  * never the full interactive demo. Mounted only while the drawer is open.
  */
 function ServicePreview({ slug }: { slug: string }) {
-  if (slug === "video-editing") {
+  if (slug === "video-editing" || slug === "video-production") {
     return (
       <span className="relative mt-[4px] block h-[30px] w-full max-w-[96px] overflow-hidden rounded-[3px] border" style={{ borderColor: "var(--line)" }} aria-hidden>
         <span className="absolute inset-0 flex items-center justify-center gap-[2px]">
@@ -333,6 +333,20 @@ function ServicePreview({ slug }: { slug: string }) {
           ))}
         </span>
         <span className="tv-head absolute top-0 bottom-0 w-px" style={{ background: "var(--accent)" }} />
+      </span>
+    );
+  }
+  if (slug === "pitch-decks-storytelling") {
+    return (
+      <span className="relative mt-[4px] flex h-[30px] w-full max-w-[96px] items-center justify-center gap-[4px] overflow-hidden rounded-[3px] border p-[4px]" style={{ borderColor: "var(--line)" }} aria-hidden>
+        <span className="flex-1 h-full rounded-[2px] border border-dashed flex flex-col justify-center gap-[2px] p-[2px]" style={{ borderColor: "var(--line)" }}>
+          <span className="h-[2px] w-[70%] rounded-full" style={{ background: "var(--line)" }} />
+          <span className="h-[2px] w-[50%] rounded-full" style={{ background: "var(--line)" }} />
+        </span>
+        <span className="flex-1 h-full rounded-[2px] border flex flex-col justify-center gap-[2px] p-[2px]" style={{ borderColor: "var(--accent-deep)", background: "rgba(200,241,79,0.08)" }}>
+          <span className="h-[2px] w-[80%] rounded-full" style={{ background: "var(--accent-deep)" }} />
+          <span className="h-[2px] w-[40%] rounded-full" style={{ background: "var(--fg)" }} />
+        </span>
       </span>
     );
   }

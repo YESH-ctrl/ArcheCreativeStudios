@@ -36,9 +36,12 @@ export const SHOWCASE_CONFIG = {
    */
   safetyTimeoutMs: {
     "video-editing": 7500,
+    "video-production": 7500,
+    "pitch-decks-storytelling": 7500,
     "web-development": 7000,
     "ai-chatbots": 7500,
     "ai-automation": 13000,
+    "ai-solutions-automation": 13000,
   } as Record<string, number>,
 } as const;
 
@@ -243,8 +246,8 @@ export function Chapters() {
             const freshTags = freshCopy.querySelectorAll(".svc-tag-item");
             gsap.fromTo(
               freshTags,
-              { y: 16, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power2.out" }
+              { y: 16, yPercent: 0, opacity: 0 },
+              { y: 0, yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "power2.out" }
             );
 
             // EXPLORE button fades in last
@@ -252,8 +255,8 @@ export function Chapters() {
             if (freshBtn) {
               gsap.fromTo(
                 freshBtn,
-                { opacity: 0, y: 8 },
-                { opacity: 1, y: 0, duration: 0.4, delay: 0.3, ease: "power2.out" }
+                { opacity: 0, y: 8, yPercent: 0 },
+                { opacity: 1, y: 0, yPercent: 0, duration: 0.4, delay: 0.3, ease: "power2.out" }
               );
             }
           });
@@ -395,7 +398,7 @@ export function Chapters() {
     if (!sec) return;
 
     const fitStage = () => {
-      const h = Math.min(440, Math.max(300, Math.round(window.innerHeight - 350)));
+      const h = Math.min(480, Math.max(380, Math.round(window.innerHeight - 300)));
       sec.style.setProperty("--svc-stage-h", `${h}px`);
     };
     fitStage();
@@ -517,9 +520,9 @@ export function Chapters() {
           <span className="mono flex-none"><span ref={counterNumRef} className="inline-block">{s.n}</span> / {String(services.length).padStart(2, "0")}</span>
         </div>
 
-        {/* copy + stage: Rebalanced layout with stretched left column vertically distributed between content group and bottom CTA */}
-        <div className="order-2 grid items-start gap-[clamp(28px,3.5vw,48px)] py-[clamp(20px,3vh,32px)] min-[900px]:items-stretch min-[900px]:grid-cols-[clamp(340px,28vw,410px)_minmax(0,1fr)]">
-          <div ref={copy} className="flex min-w-0 flex-col min-[900px]:h-full min-[900px]:justify-between min-[900px]:pt-[2px] min-[900px]:pb-[12px]">
+        {/* copy + stage: Balanced layout with dedicated spacing between process tags and CTA button */}
+        <div className="order-2 grid items-start gap-[clamp(28px,3.5vw,48px)] py-[clamp(20px,3vh,32px)] min-[900px]:items-center min-[900px]:grid-cols-[clamp(340px,28vw,420px)_minmax(0,1fr)]">
+          <div ref={copy} className="flex min-w-0 flex-col gap-[clamp(20px,2.4vh,30px)] min-[900px]:justify-center min-[900px]:pt-[2px] min-[900px]:pb-[12px]">
             {/* PRIMARY GROUP 1: CONTENT GROUP (Service Number, Title, Description, Process Tags) */}
             <div className="flex flex-col">
               {/* Service Number */}
@@ -576,7 +579,7 @@ export function Chapters() {
 
               {/* Process Tags */}
               <div
-                className="flex flex-wrap items-center gap-x-[clamp(6px,0.9vw,10px)] gap-y-[8px] mb-[clamp(24px,3vh,30px)] min-[900px]:mb-0"
+                className="flex flex-wrap items-center gap-x-[clamp(6px,0.9vw,10px)] gap-y-[8px]"
               >
                 {s.arc.map((a, k) => (
                   <span key={a} className="svc-tag-item flex items-center gap-[clamp(6px,0.9vw,10px)] flex-none">
@@ -604,11 +607,11 @@ export function Chapters() {
             </div>
 
             {/* PRIMARY GROUP 2: EXPLORE CTA */}
-            <div className="svc-btn-wrap">
+            <div className="svc-btn-wrap pt-[4px]">
               <Link
                 to={`/services/${s.slug}`}
                 className="btn btn-ghost"
-                cursor="OPEN"
+                data-cursor="OPEN"
                 onNavigate={() => {
                   const stage = document.getElementById("services-stage");
                   if (stage && !prefersReducedMotion()) {

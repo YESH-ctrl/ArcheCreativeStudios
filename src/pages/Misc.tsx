@@ -1,14 +1,13 @@
 import { services } from "../data/site";
 import { WorkIndex } from "../components/WorkIndex";
 import { SCENES } from "../components/Scenes";
-import { FinalCTA } from "../components/Sections";
 import { Link, usePage } from "../lib/router";
 import { useReveal, useParallax } from "../lib/reveal";
 import { useEffect, useRef, useState } from "react";
 
 /* ================= /services — services index ============ */
 export function ServicesIndex() {
-  usePage("Services — Arche");
+  usePage("Services | Arche Creative Studios");
   useReveal();
   useParallax();
 
@@ -34,8 +33,6 @@ export function ServicesIndex() {
           ))}
         </div>
       </section>
-
-      <FinalCTA />
     </>
   );
 }
@@ -91,7 +88,7 @@ function ServiceCard({ slug, flip }: { slug: string; flip: boolean }) {
 
 /* ================= /work — the portfolio index ====================== */
 export function WorkPage() {
-  usePage("Work — Arche");
+  usePage("Work | Arche Creative Studios");
   useReveal();
   useParallax();
 
@@ -115,8 +112,6 @@ export function WorkPage() {
           <WorkIndex />
         </div>
       </section>
-
-      <FinalCTA />
     </>
   );
 }
