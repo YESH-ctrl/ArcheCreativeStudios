@@ -170,8 +170,8 @@ export function PricingPage() {
           </div>
 
           {/* Right Column: Key Principles */}
-          <div className="lg:col-span-7 flex flex-col gap-[18px]">
-            <div className="border border-[var(--line)] p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
+          <div className="lg:col-span-7 flex flex-col gap-[18px] min-w-0 max-w-full">
+            <div className="border border-[var(--line)] p-[18px_16px] sm:p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
               <div className="flex items-center gap-[10px] mb-[8px]">
                 <span className="mono text-[11px] text-[var(--accent-ink)] font-semibold">01</span>
                 <h3 className="d4 font-medium">Fixed Milestones & Defined Deliverables</h3>
@@ -181,7 +181,7 @@ export function PricingPage() {
               </p>
             </div>
 
-            <div className="border border-[var(--line)] p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
+            <div className="border border-[var(--line)] p-[18px_16px] sm:p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
               <div className="flex items-center gap-[10px] mb-[8px]">
                 <span className="mono text-[11px] text-[var(--accent-ink)] font-semibold">02</span>
                 <h3 className="d4 font-medium">50% Commitment Deposit</h3>
@@ -191,7 +191,7 @@ export function PricingPage() {
               </p>
             </div>
 
-            <div className="border border-[var(--line)] p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
+            <div className="border border-[var(--line)] p-[18px_16px] sm:p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
               <div className="flex items-center gap-[10px] mb-[8px]">
                 <span className="mono text-[11px] text-[var(--accent-ink)] font-semibold">03</span>
                 <h3 className="d4 font-medium">Structured Revision Passes</h3>
@@ -201,7 +201,7 @@ export function PricingPage() {
               </p>
             </div>
 
-            <div className="border border-[var(--line)] p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
+            <div className="border border-[var(--line)] p-[18px_16px] sm:p-[22px_26px] rounded-[6px] bg-[var(--bg-2)]">
               <div className="flex items-center gap-[10px] mb-[8px]">
                 <span className="mono text-[11px] text-[var(--accent-ink)] font-semibold">04</span>
                 <h3 className="d4 font-medium">Start Single, Scale & Connect</h3>
@@ -326,7 +326,7 @@ function ServicePricingBlock({
         <div className="grid gap-[24px] lg:grid-cols-12 mt-[36px]">
           {/* Specialist Services */}
           {service.specialistServices && service.specialistServices.length > 0 && (
-            <div className="lg:col-span-7 rounded-[8px] border border-[var(--line)] p-[24px] bg-[var(--bg-2)]">
+            <div className="lg:col-span-7 rounded-[8px] border border-[var(--line)] p-[16px] sm:p-[24px] bg-[var(--bg-2)] min-w-0 max-w-full">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-[12px] mb-[16px]">
                 <h4 className="mono text-[12px] uppercase tracking-wider text-[var(--fg)] font-semibold">
                   Specialist Services
@@ -339,7 +339,7 @@ function ServicePricingBlock({
                     key={sIdx}
                     className="py-[12px] flex flex-col sm:flex-row sm:items-baseline justify-between gap-[6px]"
                   >
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <span className="d4 text-[14px] font-medium block">{sp.name}</span>
                       {sp.description && (
                         <span className="body-s text-[12px] text-[var(--muted)] block mt-[2px]">
@@ -347,7 +347,7 @@ function ServicePricingBlock({
                         </span>
                       )}
                     </div>
-                    <span className="font-mono text-[13px] font-semibold text-[var(--accent-ink)] whitespace-nowrap">
+                    <span className="font-mono text-[13px] font-semibold text-[var(--accent-ink)] sm:whitespace-nowrap">
                       {sp.price}
                     </span>
                   </div>
@@ -357,10 +357,10 @@ function ServicePricingBlock({
           )}
 
           {/* Add-Ons & Care Plans */}
-          <div className={`${service.specialistServices ? "lg:col-span-5" : "lg:col-span-12"} flex flex-col gap-[20px]`}>
+          <div className={`${service.specialistServices ? "lg:col-span-5" : "lg:col-span-12"} flex flex-col gap-[20px] min-w-0 max-w-full`}>
             {/* Add-Ons */}
             {service.addOns && service.addOns.length > 0 && (
-              <div className="rounded-[8px] border border-[var(--line)] p-[24px] bg-[var(--bg-2)]">
+              <div className="rounded-[8px] border border-[var(--line)] p-[16px] sm:p-[24px] bg-[var(--bg-2)] min-w-0 max-w-full">
                 <div className="flex items-center justify-between border-b border-[var(--line)] pb-[12px] mb-[16px]">
                   <h4 className="mono text-[12px] uppercase tracking-wider text-[var(--fg)] font-semibold">
                     Add-On Options
@@ -371,10 +371,10 @@ function ServicePricingBlock({
                   {service.addOns.map((ao, aIdx) => (
                     <div
                       key={aIdx}
-                      className="py-[10px] flex items-center justify-between gap-[10px]"
+                      className="py-[10px] flex flex-col sm:flex-row sm:items-center justify-between gap-[4px] sm:gap-[10px]"
                     >
                       <span className="body-s text-[13px] text-[var(--fg)]">{ao.name}</span>
-                      <span className="font-mono text-[12px] font-medium text-[var(--accent-ink)] whitespace-nowrap">
+                      <span className="font-mono text-[12px] font-medium text-[var(--accent-ink)] sm:whitespace-nowrap">
                         {ao.price}
                       </span>
                     </div>
@@ -385,7 +385,7 @@ function ServicePricingBlock({
 
             {/* Care Plans (if present) */}
             {service.carePlans && service.carePlans.length > 0 && (
-              <div className="rounded-[8px] border border-[var(--line)] p-[24px] bg-[var(--bg-2)]">
+              <div className="rounded-[8px] border border-[var(--line)] p-[16px] sm:p-[24px] bg-[var(--bg-2)] min-w-0 max-w-full">
                 <div className="flex items-center justify-between border-b border-[var(--line)] pb-[12px] mb-[16px]">
                   <h4 className="mono text-[12px] uppercase tracking-wider text-[var(--fg)] font-semibold">
                     Monthly Care & Maintenance
@@ -396,7 +396,7 @@ function ServicePricingBlock({
                   {service.carePlans.map((cp, cIdx) => (
                     <div
                       key={cIdx}
-                      className="border border-[var(--line)] p-[14px] rounded-[6px] bg-[var(--bg)]"
+                      className="border border-[var(--line)] p-[14px] rounded-[6px] bg-[var(--bg)] min-w-0 max-w-full"
                     >
                       <div className="flex items-baseline justify-between mb-[6px]">
                         <span className="font-mono text-[13px] font-semibold">{cp.name}</span>

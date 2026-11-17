@@ -240,7 +240,7 @@ export function ContactPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       onBlur={() => setTouched((p) => ({ ...p, name: true }))}
-                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.name && !isNameValid
+                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[16px] sm:text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.name && !isNameValid
                           ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                           : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
                         }`}
@@ -265,7 +265,7 @@ export function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onBlur={() => setTouched((p) => ({ ...p, email: true }))}
-                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.email && !isEmailValid
+                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[16px] sm:text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.email && !isEmailValid
                           ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                           : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
                         }`}
@@ -291,7 +291,7 @@ export function ContactPage() {
                       placeholder="e.g. +91 98765 43210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full rounded-[6px] border border-[var(--line)] bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:border-[var(--accent-deep)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+                      className="w-full rounded-[6px] border border-[var(--line)] bg-[var(--bg)] px-[14px] py-[11px] text-[16px] sm:text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:border-[var(--accent-deep)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                     />
                   </div>
 
@@ -307,7 +307,7 @@ export function ContactPage() {
                         value={service}
                         onChange={(e) => setService(e.target.value)}
                         onBlur={() => setTouched((p) => ({ ...p, service: true }))}
-                        className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] focus:outline-none focus:ring-1 appearance-none cursor-pointer ${touched.service && !isServiceValid
+                        className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[16px] sm:text-[14px] text-[var(--fg)] focus:outline-none focus:ring-1 appearance-none cursor-pointer ${touched.service && !isServiceValid
                             ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                             : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
                           }`}
@@ -345,7 +345,7 @@ export function ContactPage() {
                     value={projectDetails}
                     onChange={(e) => setProjectDetails(e.target.value)}
                     onBlur={() => setTouched((p) => ({ ...p, projectDetails: true }))}
-                    className={`w-full rounded-[6px] border bg-[var(--bg)] p-[14px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 leading-relaxed ${touched.projectDetails && !isDetailsValid
+                    className={`w-full rounded-[6px] border bg-[var(--bg)] p-[14px] text-[16px] sm:text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 leading-relaxed ${touched.projectDetails && !isDetailsValid
                         ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                         : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
                       }`}

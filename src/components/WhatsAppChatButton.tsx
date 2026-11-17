@@ -26,14 +26,14 @@ export function WhatsAppChatButton({
       target="_blank"
       rel="noopener noreferrer"
       data-cursor="CHAT"
-      className={`inline-flex items-center transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] focus:outline-none ${className}`}
+      className={`inline-flex max-w-full items-center transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] focus:outline-none ${className}`}
       title="Chat on WhatsApp with Arche Creative Studios"
       aria-label="Chat on WhatsApp with Arche Creative Studios"
     >
       <img
         src={src}
         alt="Chat on WhatsApp"
-        className={`${heightClass} w-auto object-contain drop-shadow-sm select-none`}
+        className={`${heightClass} max-w-full w-auto object-contain drop-shadow-sm select-none`}
         loading="lazy"
       />
     </a>

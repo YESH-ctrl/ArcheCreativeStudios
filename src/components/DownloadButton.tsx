@@ -29,7 +29,7 @@ export function DownloadButton({
     <a
       href={downloadUrl}
       download={filename}
-      className={`group relative inline-flex items-center gap-[9px] rounded-full border px-[18px] py-[10px] font-mono text-[11px] uppercase tracking-[0.12em] select-none transition-all duration-300 ${variant === "primary"
+      className={`group relative inline-flex max-w-full items-center gap-[9px] rounded-full border px-[18px] py-[10px] font-mono text-[11px] uppercase tracking-[0.12em] select-none transition-all duration-300 ${variant === "primary"
           ? "border-[var(--fg)] bg-[var(--fg)] text-[var(--bg)] hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-[#0c0c0d]"
           : "border-[var(--line)] bg-[var(--bg)] text-[var(--fg)] hover:border-[var(--accent-deep)] hover:bg-[var(--accent)] hover:text-[#0c0c0d]"
         } ${className}`}
@@ -56,11 +56,11 @@ export function DownloadButton({
         <path d="M6 10l2 2 2-2" />
       </svg>
 
-      <span className="truncate">{label}</span>
+      <span className="min-w-0 flex-1 truncate">{label}</span>
 
       {/* Subtle indicator tag */}
       <span
-        className="rounded-[3px] px-[4px] py-[1px] text-[9px] tracking-normal font-mono transition-colors duration-300"
+        className="flex-shrink-0 rounded-[3px] px-[4px] py-[1px] text-[9px] tracking-normal font-mono transition-colors duration-300"
         style={{
           background: "rgba(12,12,13,0.06)",
         }}
