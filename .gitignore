@@ -1,35 +1,13 @@
-# Build-machine artifacts. node_modules is checked into this repository for
-# the single-file build, so only host-specific *additions* and caches are
-# ignored — tracked files stay tracked.
-node_modules/.package-lock.json
-node_modules/.vite/
-node_modules/.cache/
-node_modules/@esbuild/linux-*/
-node_modules/@napi-rs/
-node_modules/@rollup/rollup-linux-*/
-node_modules/@tailwindcss/oxide-linux-*/
-node_modules/lightningcss-linux-*/
-node_modules/rollup/node_modules/
+# Dependencies
+node_modules/
 
-# Local tooling / generated previews
+# Production build output
+dist/
+
+# Local tooling & OS artifacts
 .DS_Store
 *.log
 *.png
 arche-preview*
 scripts/audit_artifacts/
 audit_deliverables/
-
-# Temporary diagnostic scripts & experiments
-scripts/audit-morph-engine.mjs
-scripts/capture-*.mjs
-scripts/check-overlap.mjs
-scripts/debug-copy.mjs
-scripts/diagnose-left-column.mjs
-scripts/inspect-spacing.mjs
-scripts/measure-vertical.mjs
-scripts/run-full-audit.mjs
-scripts/test-*.mjs
-
-node_modules/
-dist/
-
