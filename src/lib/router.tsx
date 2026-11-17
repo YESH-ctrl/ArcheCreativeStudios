@@ -43,7 +43,7 @@ export function navigate(to: string) {
 /** Full-screen wipe that carries the route change in its covered frame. */
 export function RouteWipe() {
   const el = useRef<HTMLDivElement>(null);
-  const label = useRef<HTMLParagraphElement>(null);
+  const label = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onNav = (e: Event) => {
@@ -55,15 +55,23 @@ export function RouteWipe() {
         },
       });
       tl.set(wipe, { clipPath: "inset(100% 0 0 0)" })
-        .to(wipe, { clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: "power4.inOut" })
-        .to(label.current, { opacity: 1, duration: 0.18 }, "-=0.2")
+        .to(wipe, { clipPath: "inset(0% 0 0 0)", duration: 0.48, ease: "power4.inOut" })
+        .fromTo(
+          label.current,
+          { opacity: 0, scale: 0.92, y: 16 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: "power3.out" },
+          "-=0.22"
+        )
         .add(() => {
           window.location.hash = `#${to}`;
           window.scrollTo(0, 0);
           ScrollTrigger.refresh();
         })
-        .to(label.current, { opacity: 0, duration: 0.18, delay: 0.16 })
-        .to(wipe, { clipPath: "inset(0 0 100% 0)", duration: 0.55, ease: "power4.inOut" })
+        .to(
+          label.current,
+          { opacity: 0, scale: 1.05, y: -10, duration: 0.22, ease: "power2.in", delay: 0.18 }
+        )
+        .to(wipe, { clipPath: "inset(0 0 100% 0)", duration: 0.52, ease: "power4.inOut" })
         .set(wipe, { clipPath: "inset(0 0 100% 0)" });
     };
     window.addEventListener("arche:navigate", onNav);
@@ -72,9 +80,14 @@ export function RouteWipe() {
 
   return (
     <div ref={el} className="wipe" aria-hidden>
-      <p ref={label} className="mono">
-        Arche
-      </p>
+      <div ref={label} className="wipe-content">
+        <h2 className="wipe-arche">
+          Arche<span style={{ color: "var(--accent)" }}>.</span>
+        </h2>
+        <span className="wipe-sub">
+          Creative Studios
+        </span>
+      </div>
     </div>
   );
 }

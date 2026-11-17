@@ -459,9 +459,31 @@ textarea.field {
   display: grid;
   place-items: center;
 }
-.wipe .mono {
-  color: var(--solid-fg);
+.wipe-content {
   opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  text-align: center;
+  padding: 0 24px;
+}
+.wipe-arche {
+  font-size: clamp(64px, 12vw, 150px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  color: var(--solid-fg);
+  line-height: 0.92;
+  margin: 0;
+}
+.wipe-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.3vw, 15px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: clamp(10px, 1.5vw, 18px);
 }
 
 /* ---------- recurring signal node (same treatment everywhere) ---------- */
