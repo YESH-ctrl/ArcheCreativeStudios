@@ -271,12 +271,12 @@ export function resolveIntent(query: string): Resolution {
 
 /** The starter chips for service discovery */
 export const STARTER_CHIPS = [
-  "I need a website.",
-  "I want to automate my business.",
-  "I need an AI chatbot.",
-  "I need an AI agent.",
-  "I need video editing.",
-  "I want to connect my existing tools.",
+  "I need a high-performance website.",
+  "I need an investor pitch deck.",
+  "I need video production & editing.",
+  "I want to automate my business workflow.",
+  "I need a custom AI agent / chatbot.",
+  "What are your pricing packages?",
   "I'm not sure what I need.",
 ];
 

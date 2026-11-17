@@ -20,9 +20,11 @@ export interface ProjectBrief {
   details: string;
   timeline: string;
   seed: string;
+  slug: string;
+  startingPrice: string;
 }
 
-export type DiscoveryDomain = "web" | "automation" | "agent" | "video" | "unsure";
+export type DiscoveryDomain = "web" | "automation" | "agent" | "video" | "pitch" | "unsure";
 export type DiscoveryStep = "initial" | "clarify_type" | "clarify_details" | "brief_ready";
 
 export interface DiscoveryState {
@@ -99,6 +101,9 @@ function matchesDomainContext(norm: string, domain: DiscoveryDomain | null): boo
   }
   if (domain === "video") {
     return hasAny(norm, ["short", "reels", "tiktok", "shorts", "long", "youtube", "podcast", "product", "launch", "brand", "film", "course", "education", "series", "video", "content", "footage", "raw", "script", "ready", "outline", "pacing", "cadence", "weekly", "batch", "edit", "editing", "cut"]);
+  }
+  if (domain === "pitch") {
+    return hasAny(norm, ["pitch", "deck", "pitch deck", "pitchdeck", "slides", "presentation", "investor", "fundraising", "storytelling", "keynote", "series a", "seed", "venture", "fundraise", "slideshow"]);
   }
   if (domain === "unsure") {
     return hasAny(norm, ["website", "convert", "outdated", "web", "manual", "wastes", "repetitive", "automate", "workflow", "hours", "respond", "inquiries", "agent", "support", "customer", "fast enough", "footage", "content", "video", "publish", "recording"]);
@@ -218,11 +223,13 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     if (prevState.step === "clarify_details") {
       const details = input.length > 3 ? input : "Custom motion front-end";
       const brief: ProjectBrief = {
-        service: "High-Performance Web Development",
+        service: "Web Development & Digital Experiences",
         scope: `${prevState.selectedType} with custom 2D DOM motion`,
         details: `${details} · Hand-built, zero page-builder bloat, sub-second TTFB`,
         timeline: "2–4 weeks (fixed written milestone guarantee)",
         seed: "web",
+        slug: "web-development",
+        startingPrice: "₹7,999",
       };
       return {
         lines: [
@@ -237,7 +244,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         label: "Arche Brief · Web Development",
         followUps: [
           "Start project with this brief →",
-          "Explore Web Development demo",
+          "Explore Web Development page",
           "Ask about another service",
         ],
         brief,
@@ -280,11 +287,13 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     if (prevState.step === "clarify_details") {
       const details = input.length > 3 ? input : "Connected business tools";
       const brief: ProjectBrief = {
-        service: "AI Workflow Automation",
+        service: "AI Solutions & Workflow Automation",
         scope: `${prevState.selectedType} connecting ${details}`,
         details: "Event-driven routing with human verification gate for exceptions",
         timeline: "2–3 weeks to production readiness",
         seed: "automation",
+        slug: "ai-solutions-automation",
+        startingPrice: "₹2,499",
       };
       return {
         lines: [
@@ -299,7 +308,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         label: "Arche Brief · Automation",
         followUps: [
           "Start project with this brief →",
-          "View live Automation demo",
+          "Explore AI Solutions page",
           "Ask about another service",
         ],
         brief,
@@ -342,11 +351,13 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     if (prevState.step === "clarify_details") {
       const details = input.length > 3 ? input : "Grounded retrieval & actions";
       const brief: ProjectBrief = {
-        service: "Autonomous AI Agent",
+        service: "AI Solutions & Autonomous Agents",
         scope: `${prevState.selectedType} with ${details}`,
         details: "Grounded retrieval, hard guardrails, and human escalation handoff",
         timeline: "2–3 weeks",
         seed: "agent",
+        slug: "ai-solutions-automation",
+        startingPrice: "₹3,999",
       };
       return {
         lines: [
@@ -361,7 +372,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         label: "Arche Brief · AI Agent",
         followUps: [
           "Start project with this brief →",
-          "Try live Agent demo",
+          "Explore AI Solutions page",
           "Ask about another service",
         ],
         brief,
@@ -404,11 +415,13 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     if (prevState.step === "clarify_details") {
       const details = input.length > 3 ? input : "Regular monthly edits";
       const brief: ProjectBrief = {
-        service: "Video Post-Production & Motion",
+        service: "Video Production & High-Impact Editing",
         scope: `${prevState.selectedType} on a ${details}`,
         details: "Sound design, typography/captions, pacing cuts, color grade, 48h revisions",
         timeline: "2–5 working days per batch",
         seed: "video",
+        slug: "video-production",
+        startingPrice: "₹799",
       };
       return {
         lines: [
@@ -423,7 +436,71 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         label: "Arche Brief · Video Editing",
         followUps: [
           "Start project with this brief →",
-          "Try live Video Scrubber demo",
+          "Explore Video Production page",
+          "Ask about another service",
+        ],
+        brief,
+        nextState: {
+          ...prevState,
+          step: "brief_ready",
+          selectedDetails: details,
+          brief,
+        },
+      };
+    }
+  }
+
+  // Domain: PITCH DECKS
+  if (prevState.domain === "pitch" && isContextMatch) {
+    if (prevState.step === "clarify_type") {
+      const type = input.length > 3 ? input : "Investor Pitch Deck";
+      return {
+        lines: [
+          `A ${type} narrative.`,
+          "What is your target slide count and current state of draft?",
+        ],
+        trigger: "service:video",
+        label: "Arche Discovery · Deck Scope",
+        followUps: [
+          "10–15 slides (Outline / rough draft ready)",
+          "15–25 slides (Full copy ready, need design & story)",
+          "Starting from scratch (Need narrative strategy)",
+          "Redesign existing deck for upcoming investor meetings",
+        ],
+        brief: null,
+        nextState: {
+          ...prevState,
+          step: "clarify_details",
+          selectedType: type,
+        },
+      };
+    }
+
+    if (prevState.step === "clarify_details") {
+      const details = input.length > 3 ? input : "10–15 slides";
+      const brief: ProjectBrief = {
+        service: "Pitch Decks & Visual Storytelling",
+        scope: `${prevState.selectedType} (${details})`,
+        details: "Narrative structure, bespoke slide design, typography, Figma/Keynote/PDF deliverables",
+        timeline: "5–10 working days with milestone reviews",
+        seed: "pitch",
+        slug: "pitch-decks-storytelling",
+        startingPrice: "₹3,999",
+      };
+      return {
+        lines: [
+          "Here is your pitch deck scoping brief:",
+          `• Service: Pitch Decks & Visual Storytelling (${prevState.selectedType})`,
+          `• Scope: ${details} with custom graphic architecture`,
+          "• Deliverables: Editable presentation (Keynote / PPT / Figma) + PDF export",
+          "• Timeline: 5–10 business days with structured feedback milestones",
+          "Ready to turn this brief into a tailored proposal?",
+        ],
+        trigger: "contact",
+        label: "Arche Brief · Pitch Decks",
+        followUps: [
+          "Start project with this brief →",
+          "Explore Pitch Decks page",
           "Ask about another service",
         ],
         brief,
@@ -459,6 +536,11 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     return routeToDomain("video");
   }
 
+  // Pitch Deck trigger detection
+  if (hasAny(norm, ["pitch", "deck", "pitch deck", "pitchdeck", "slides", "presentation", "investor", "fundraising", "storytelling", "keynote"])) {
+    return routeToDomain("pitch");
+  }
+
   // Unsure trigger detection
   if (hasAny(norm, ["not sure", "don't know", "dont know", "help me decide", "what should i", "recommend", "options", "where to start"])) {
     return routeToDomain("unsure");
@@ -474,7 +556,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
       ],
       trigger: "system",
       label: "Arche · Overview",
-      followUps: ["I need a website.", "I want to automate my business.", "I need an AI agent.", "I need video editing."],
+      followUps: ["I need a website.", "I want to automate my business.", "I need a pitch deck.", "I need video editing."],
       brief: null,
       nextState: INITIAL_DISCOVERY_STATE,
     };
@@ -484,11 +566,11 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
   return {
     lines: [
       "I don't have a specific answer for that yet — I'm a service discovery guide for Arche.",
-      "Would you like to scope a website, workflow automation, AI agent, or video editing project?",
+      "Would you like to scope a website, workflow automation, pitch deck, or video editing project?",
     ],
     trigger: "contact",
     label: "no matched intent",
-    followUps: ["I need a website.", "I want to automate my business.", "I need an AI agent.", "I need video editing."],
+    followUps: ["I need a website.", "I want to automate my business.", "I need an investor pitch deck.", "I need video editing."],
     brief: null,
     nextState: INITIAL_DISCOVERY_STATE,
   };
@@ -590,6 +672,31 @@ function routeToDomain(domain: DiscoveryDomain, customIntro?: string): Discovery
           domain: "video",
           step: "clarify_type",
           serviceTitle: "Video Post-Production",
+          selectedType: "",
+          selectedDetails: "",
+          brief: null,
+        },
+      };
+
+    case "pitch":
+      return {
+        lines: [
+          customIntro || "We design high-impact investor pitch decks, corporate presentations, and visual storylines that clarify complex value propositions.",
+          "What is the primary focus of your presentation?",
+        ],
+        trigger: "service:video",
+        label: "Arche Discovery · Pitch Decks & Storytelling",
+        followUps: [
+          "Seed / Series A fundraising deck",
+          "Enterprise B2B sales presentation",
+          "Product launch & keynote slides",
+          "Company overview & brand story",
+        ],
+        brief: null,
+        nextState: {
+          domain: "pitch",
+          step: "clarify_type",
+          serviceTitle: "Pitch Decks & Storytelling",
           selectedType: "",
           selectedDetails: "",
           brief: null,
