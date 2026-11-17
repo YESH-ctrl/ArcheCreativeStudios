@@ -91,6 +91,8 @@ export const STUDIO_INFO = {
   phone: "+91 7995937536",
   phoneHref: "tel:+917995937536",
   whatsappHref: "https://Wa.me/+917995937536",
+  instagramUrl: "https://www.instagram.com/archecreativestudios/",
+  linkedinUrl: "https://www.linkedin.com/in/arche-creative-studios/",
   completeCataloguePdf: "ARCHE_Creative_Studios_Complete_Service_Catalogue.pdf",
   generalDisclaimer:
     "All prices are proposed ARCHE launch rates in INR. Final project pricing depends on the confirmed scope, deliverables, required integrations and project complexity. Any additional requirements will be discussed and quoted before work begins.",

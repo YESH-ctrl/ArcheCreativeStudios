@@ -467,6 +467,43 @@ export function ContactPage() {
                   {STUDIO_INFO.websiteUrl}
                 </a>
               </div>
+
+              {/* Follow & Connect on Social */}
+              <div className="border-t border-[var(--line)] pt-[16px] space-y-[10px]">
+                <span className="font-mono text-[10px] text-[var(--muted)] uppercase block">
+                  Follow & Connect
+                </span>
+                <div className="flex flex-wrap items-center gap-[10px]">
+                  <a
+                    href="https://www.instagram.com/archecreativestudios/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-[7px] rounded-[6px] border border-[var(--line)] bg-[var(--bg-2)] px-[12px] py-[7px] font-mono text-[11px] text-[var(--fg)] hover:border-[var(--accent-deep)] hover:text-[var(--accent-ink)] transition-colors shadow-sm"
+                    data-cursor="OPEN"
+                  >
+                    <svg className="h-[14px] w-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                    </svg>
+                    <span>Instagram</span> ↗
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/arche-creative-studios/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-[7px] rounded-[6px] border border-[var(--line)] bg-[var(--bg-2)] px-[12px] py-[7px] font-mono text-[11px] text-[var(--fg)] hover:border-[var(--accent-deep)] hover:text-[var(--accent-ink)] transition-colors shadow-sm"
+                    data-cursor="OPEN"
+                  >
+                    <svg className="h-[14px] w-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect width="4" height="12" x="2" y="9" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span>LinkedIn</span> ↗
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Turnaround notice card */}

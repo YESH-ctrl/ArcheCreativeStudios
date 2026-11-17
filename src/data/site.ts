@@ -358,7 +358,10 @@ export const siteContent = {
         ],
       },
     ],
-    social: [],
+    social: [
+      { label: "Instagram", href: "https://www.instagram.com/archecreativestudios/" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/arche-creative-studios/" },
+    ],
     legal: "© 2026 ARCHE CREATIVE STUDIOS. All rights reserved.",
     note: "Technology Meets Creativity · Hyderabad, India",
   },

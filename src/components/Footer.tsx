@@ -14,6 +14,21 @@ export function Footer() {
             <Wordmark size={36} monogramScale={1.35} onDark={true} />
             <p className="mono max-w-[30ch]">{f.note}</p>
             <p className="body-s max-w-[36ch]">{siteContent.brand.line}</p>
+            <div className="flex items-center gap-[14px] pt-[4px]">
+              {f.social.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mono text-[11px] text-[var(--muted)] hover:text-[var(--accent-ink)] transition-colors inline-flex items-center gap-[4px]"
+                  data-cursor="OPEN"
+                >
+                  <span>{s.label}</span>
+                  <span className="text-[10px]" aria-hidden>↗</span>
+                </a>
+              ))}
+            </div>
           </div>
 
           {f.cols.map((col) => (
@@ -72,6 +87,21 @@ export function Footer() {
 
       <div className="wrap flex flex-wrap items-center justify-between gap-[10px] border-t py-[18px]" style={{ borderColor: "var(--line)" }}>
         <p className="mono">{f.legal}</p>
+        <div className="flex items-center gap-[16px]">
+          {f.social.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono text-[11px] text-[var(--muted)] hover:text-[var(--accent-ink)] transition-colors inline-flex items-center gap-[3px]"
+              data-cursor="OPEN"
+            >
+              <span>{s.label}</span>
+              <span className="text-[9px]" aria-hidden>↗</span>
+            </a>
+          ))}
+        </div>
         <p className="mono">Technology Meets Creativity</p>
       </div>
     </footer>
