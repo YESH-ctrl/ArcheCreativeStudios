@@ -45,8 +45,8 @@ export function Intro() {
       gsap.set(".intro-layer-a", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
       gsap.set(".intro-layer-c", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
       gsap.set(".intro-layer-full", { opacity: 0 });
-      if (dotRef.current) gsap.set(dotRef.current, { y: -100, opacity: 0, scale: 1 });
-      gsap.set(".intro-char", { yPercent: 120 });
+      if (dotRef.current) gsap.set(dotRef.current, { y: -60, opacity: 0, scale: 0.8 });
+      gsap.set(".intro-char", { y: 0, yPercent: 120, opacity: 0 });
       if (logoGroup.current) gsap.set(logoGroup.current, { y: 0, opacity: 1 });
     }
   }, [visible]);
@@ -166,7 +166,7 @@ export function Intro() {
               try {
                 sessionStorage.setItem(INTRO_KEY, "1");
                 sessionStorage.setItem("arche:booted", "1");
-              } catch {}
+              } catch { }
               window.dispatchEvent(new CustomEvent("arche:intro-done"));
               setVisible(false);
             },
@@ -189,9 +189,9 @@ export function Intro() {
       gsap.set(".intro-layer-a", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
       gsap.set(".intro-layer-c", { opacity: 0, clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
       gsap.set(".intro-layer-full", { opacity: 0 });
-      gsap.set(dotRef.current, { y: -100, opacity: 0, scale: 1 });
-      gsap.set(".intro-char", { yPercent: 120 });
-      gsap.set(logoGroup.current, { y: 0, opacity: 1 });
+      if (dotRef.current) gsap.set(dotRef.current, { y: -60, opacity: 0, scale: 0.8 });
+      gsap.set(".intro-char", { y: 0, yPercent: 120, opacity: 0 });
+      if (logoGroup.current) gsap.set(logoGroup.current, { y: 0, opacity: 1 });
 
       // Step 1: t0.0 to 0.45 — Reveal A smoothly first (wipe left-to-right across A)
       tl.to(
@@ -231,13 +231,17 @@ export function Intro() {
       tl.fromTo(
         ".intro-char",
         {
+          y: 0,
           yPercent: 120,
+          opacity: 0,
         },
         {
+          y: 0,
           yPercent: 0,
-          duration: 0.38,
+          opacity: 1,
+          duration: 0.42,
           stagger: 0.018,
-          ease: "expo.out",
+          ease: "power3.out",
         },
         0.50
       );
@@ -248,6 +252,7 @@ export function Intro() {
         {
           y: 0,
           opacity: 1,
+          scale: 1,
           duration: 0.28,
           ease: "back.out(1.6)",
         },
@@ -288,7 +293,7 @@ export function Intro() {
             try {
               sessionStorage.setItem(INTRO_KEY, "1");
               sessionStorage.setItem("arche:booted", "1");
-            } catch {}
+            } catch { }
             window.dispatchEvent(new CustomEvent("arche:intro-done"));
             setVisible(false);
           },
@@ -393,7 +398,7 @@ export function Intro() {
                 <span
                   className="intro-char inline-block"
                   style={{
-                    transform: prefersReducedMotion() ? "none" : "translateY(120%)",
+                    opacity: prefersReducedMotion() ? 1 : 0,
                   }}
                 >
                   {char === " " ? "\u00A0" : char}
@@ -414,7 +419,6 @@ export function Intro() {
               marginTop: "clamp(4px, 0.7vw, 8px)",
               transformOrigin: "50% 100%",
               opacity: prefersReducedMotion() ? 1 : 0,
-              transform: prefersReducedMotion() ? "none" : "translateY(-100px)",
             }}
           />
         </div>
