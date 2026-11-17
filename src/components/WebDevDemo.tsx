@@ -123,6 +123,22 @@ function Core({ phase, preview = false }: { phase: number; preview?: boolean }) 
 
       {/* work surface */}
       <div className="wd-surface relative flex flex-1 flex-col overflow-hidden rounded-[5px] border" style={{ borderColor: "var(--line)", background: "var(--bg-2)" }}>
+        {/* Browser Chrome Header */}
+        <div className="relative z-20 flex items-center justify-between border-b px-[10px] py-[6px] text-[8.5px] font-mono select-none" style={{ borderColor: "var(--line)", background: "var(--bg)" }}>
+          <div className="flex items-center gap-[5px]">
+            <span className="h-[7px] w-[7px] rounded-full bg-[#ff5f56]" />
+            <span className="h-[7px] w-[7px] rounded-full bg-[#ffbd2e]" />
+            <span className="h-[7px] w-[7px] rounded-full bg-[#27c93f]" />
+          </div>
+          <div className="flex items-center gap-[5px] rounded-full border px-[8px] py-[2px] text-[8px] font-mono text-[var(--muted)]" style={{ borderColor: "var(--line)", background: "var(--bg-2)" }}>
+            <span className="text-[var(--accent)]">🔒</span>
+            <span className="tracking-tight">arche.studio/digital-systems</span>
+          </div>
+          <span className="font-mono text-[8px] font-bold tracking-wider" style={{ color: "var(--accent-ink)" }}>
+            {phase === 0 ? "BLUEPRINT 01" : phase === 1 ? "12-COL GRID" : phase === 2 ? "INTERFACE 03" : "● LIVE PRODUCTION"}
+          </span>
+        </div>
+
         {/* Architectural drafting grid in phase 0 & 1 */}
         {phase < 2 && (
           <div className="pointer-events-none absolute inset-0 z-0 opacity-25">
@@ -134,7 +150,7 @@ function Core({ phase, preview = false }: { phase: number; preview?: boolean }) 
               </defs>
               <rect width="100%" height="100%" fill="url(#wd-grid)" />
             </svg>
-            <div className="absolute top-[8px] right-[10px] font-mono text-[8px] uppercase tracking-widest text-[var(--faint)]">
+            <div className="absolute top-[38px] right-[10px] font-mono text-[8px] uppercase tracking-widest text-[var(--faint)]">
               {phase === 0 ? "DISASSEMBLED MODULES // UNRESOLVED" : "12-COL STRUCTURAL SNAPPING // ALIGNED"}
             </div>
           </div>

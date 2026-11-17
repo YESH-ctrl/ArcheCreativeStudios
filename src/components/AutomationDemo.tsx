@@ -582,7 +582,14 @@ export function AutomationDemo({
             {CARDS.map((c, i) => (
               <div key={c.k} data-slab={i === 0 ? "s3" : i === 1 ? "s4" : i === 2 ? "s5" : "s6"} className="au-card" data-state="idle" tabIndex={0} aria-describedby={`au-tip-${i}`}>
                 <div className="flex items-center justify-between gap-[8px]">
-                  <span className="mono mono-fg">{c.k}</span>
+                  <span className="mono mono-fg flex items-center gap-[6px]">
+                    {c.k}
+                    {mode === "auto" && phase === "done" && (
+                      <span className="text-[8px] font-mono font-normal text-[var(--accent-ink)] opacity-90">
+                        ⚡{i === 0 ? "12ms" : i === 1 ? "34ms" : i === 2 ? "45ms" : "18ms"}
+                      </span>
+                    )}
+                  </span>
                   <span className="au-mark" aria-hidden>
                     <svg className="h-[8px] w-[8px]" viewBox="0 0 10 8" fill="none">
                       <path

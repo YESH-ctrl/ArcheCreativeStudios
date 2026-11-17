@@ -51,8 +51,14 @@ STAGES["video-editing"] = ({ active, preview }: StageProps) => (
 STAGES["video-production"] = ({ active, preview }: StageProps) => (
   <VideoEditingDemo active={active} preview={preview} />
 );
-STAGES["pitch-decks-storytelling"] = ({ active }: StageProps) => (
-  withScenePad(<PitchDeckDemo active={active} />)
+STAGES["pitch-decks-storytelling"] = ({ active, preview }: StageProps) => (
+  <PitchDeckDemo active={active} preview={preview} />
+);
+STAGES["pitch-decks"] = ({ active, preview }: StageProps) => (
+  <PitchDeckDemo active={active} preview={preview} />
+);
+STAGES["storytelling"] = ({ active, preview }: StageProps) => (
+  <PitchDeckDemo active={active} preview={preview} />
 );
 /** Web Development — IDEA → STRUCTURE → INTERFACE → LIVE (Prompt 08 / Prompt 28). */
 STAGES["web-development"] = ({ active, preview }: StageProps) => (

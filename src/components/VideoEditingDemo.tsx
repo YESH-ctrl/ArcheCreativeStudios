@@ -218,168 +218,283 @@ export function VideoEditingDemo({
         </div>
       </div>
 
-      {/* Main Preview Screen (responsive 16/9 with real states) */}
+      {/* Main Preview Screen (responsive 16/9 with real studio monitors) */}
       <div
         data-slab="engine"
-        className="relative mx-auto w-full max-w-[440px] overflow-hidden rounded-[4px] border"
+        className="relative mx-auto w-full max-w-[440px] overflow-hidden rounded-[5px] border select-none"
         style={{
           aspectRatio: "16 / 9",
-          borderColor: "var(--line)",
-          background: "#0c0c0d",
+          borderColor: "rgba(200, 241, 79, 0.25)",
+          background: "#08080a",
+          boxShadow: "0 10px 30px -10px rgba(0,0,0,0.8), 0 0 1px 1px rgba(200,241,79,0.1)",
         }}
       >
+        {/* Persistent Camera HUD Framing Marks & Telemetry */}
+        <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-[10px]">
+          {/* Top HUD Row */}
+          <div className="flex items-center justify-between text-[8px] font-mono tracking-widest text-[#a1a1aa]/70">
+            <div className="flex items-center gap-[6px]">
+              <span className="inline-block h-[5px] w-[5px] rounded-full bg-red-500 animate-pulse" />
+              <span className="text-white font-semibold">4K DCI · PRORES</span>
+            </div>
+            <div className="flex items-center gap-[8px]">
+              <span>ISO 800</span>
+              <span>1/48</span>
+              <span>5600K</span>
+            </div>
+          </div>
+
+          {/* Center Crosshairs */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4V9M12 15V20M4 12H9M15 12H20" stroke="var(--accent)" strokeWidth="1" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="2.5" stroke="var(--accent)" strokeWidth="0.8" />
+            </svg>
+          </div>
+
+          {/* Right VU Audio Meter Bar */}
+          <div className="absolute right-[8px] top-1/2 -translate-y-1/2 flex flex-col gap-[2px] opacity-75">
+            {[90, 75, 82, 60, 45, 30].map((_, i) => (
+              <span
+                key={i}
+                className="h-[3px] w-[7px] rounded-[0.5px] transition-all duration-150"
+                style={{
+                  background: i === 0 ? "#ef4444" : i === 1 ? "#eab308" : "var(--accent)",
+                  opacity: (stageIndex * 2 + i) % 3 === 0 ? 0.9 : 0.35,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Bottom HUD Framing Brackets */}
+          <div className="flex items-center justify-between text-[8px] font-mono text-[#a1a1aa]/60">
+            <span>⌜ 2.39:1 CINEMASCOPE ⌟</span>
+            <span className="text-[var(--accent)] font-semibold">TC 00:04:18:22</span>
+          </div>
+        </div>
+
         {/* State 0: RAW */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
           style={{
             opacity: stageIndex === 0 ? 1 : 0,
-            filter: "saturate(0.5) contrast(0.9)",
-            background: "linear-gradient(135deg, #1c1c1f 0%, #0e0e10 100%)",
+            filter: "saturate(0.4) contrast(0.85) brightness(0.9)",
+            background: "radial-gradient(circle at 50% 50%, #1e2025 0%, #0a0b0e 100%)",
           }}
         >
           <div className="flex justify-between items-start font-mono text-[9px] text-[#8e8e93]">
-            <span>REC [RAW LOG]</span>
-            <span className="text-red-500 animate-pulse">● 24 FPS</span>
+            <span className="text-[#a1a1aa]">RED MONSTRO 8K VV [LOG3G10]</span>
+            <span className="text-red-400 font-bold">● 24.000 FPS</span>
           </div>
-          <div className="my-auto text-center font-mono text-[11px] text-[#71717a] tracking-widest uppercase">
-            [ RAW SOURCE TAKES · 4K PRORES ]
+          <div className="my-auto flex flex-col items-center gap-[6px]">
+            <div className="rounded border border-dashed border-white/20 bg-black/40 px-[14px] py-[6px] backdrop-blur-sm">
+              <span className="font-mono text-[11px] font-semibold text-white/90 tracking-widest uppercase">
+                RAW UNGRADED LOG FOOTAGE
+              </span>
+            </div>
+            <span className="font-mono text-[8.5px] text-[#8e8e93] tracking-wide">
+              FLAT SENSOR READOUT · WIDE DYNAMIC RANGE
+            </span>
           </div>
-          <div className="font-mono text-[9px] text-[#71717a]">TC 00:14:22:08</div>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#71717a]">
+            <span>GAMMA: LOG3G10</span>
+            <span>COLOR SPACE: REDWIDEGAMUTRGB</span>
+          </div>
         </div>
 
         {/* State 1: SELECT */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
           style={{
             opacity: stageIndex === 1 ? 1 : 0,
-            background: "linear-gradient(135deg, #242428 0%, #121214 100%)",
+            background: "linear-gradient(135deg, #1c1d22 0%, #0c0d10 100%)",
           }}
         >
           <div className="flex justify-between items-start font-mono text-[9px]">
-            <span style={{ color: "var(--accent-ink)" }}>TAKE 03 SELECTED</span>
-            <span className="text-[#a1a1aa]">RATIO: KEEP 12%</span>
+            <span style={{ color: "var(--accent)" }}>AI RETENTION SCAN // 3 TAKES</span>
+            <span className="text-white/70">SELECT RATIO: 18%</span>
           </div>
-          <div className="my-auto flex items-center justify-center gap-[6px]">
-            <span className="rounded border px-[8px] py-[3px] font-mono text-[10px] text-white border-zinc-600 bg-zinc-800/80">
-              CLIP 03 : HIGH RETENTION
-            </span>
+          <div className="my-auto grid grid-cols-3 gap-[8px] max-w-[340px] mx-auto w-full">
+            <div className="rounded border border-white/10 bg-black/40 p-[6px] text-center opacity-40">
+              <span className="block font-mono text-[8px] text-[#8e8e93]">TAKE 01</span>
+              <span className="font-mono text-[9px] text-red-400 font-medium">42% DROP</span>
+            </div>
+            <div className="rounded border border-white/10 bg-black/40 p-[6px] text-center opacity-40">
+              <span className="block font-mono text-[8px] text-[#8e8e93]">TAKE 02</span>
+              <span className="font-mono text-[9px] text-amber-400 font-medium">61% TRIM</span>
+            </div>
+            <div className="rounded border border-[var(--accent)] bg-[var(--accent)]/10 p-[6px] text-center shadow-[0_0_12px_rgba(200,241,79,0.2)]">
+              <span className="block font-mono text-[8px] text-[var(--accent)] font-bold">TAKE 03 ★</span>
+              <span className="font-mono text-[9px] text-white font-bold">98% KEEP</span>
+            </div>
           </div>
-          <div className="font-mono text-[9px] text-[#a1a1aa]">TRIM: -04:12 DISCARDED</div>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#a1a1aa]">
+            <span>DEAD AIR PURGED: -03:42</span>
+            <span className="text-[var(--accent)]">GOLDEN TAKE LOCKED</span>
+          </div>
         </div>
 
         {/* State 2: CUT */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
           style={{
             opacity: stageIndex === 2 ? 1 : 0,
-            background: "linear-gradient(135deg, #1f2024 0%, #0f1012 100%)",
+            background: "linear-gradient(135deg, #18191f 0%, #0b0c10 100%)",
           }}
         >
-          <div className="flex justify-between items-start font-mono text-[9px] text-white">
-            <span className="text-[#c8f14f]">IN: 00:01:04</span>
-            <span className="text-[#c8f14f]">OUT: 00:08:19</span>
+          <div className="flex justify-between items-start font-mono text-[9px]">
+            <span className="text-[var(--accent)]">RHYTHMIC IN/OUT SPLICE</span>
+            <span className="text-white/80">PRECISION: ±1 FRAME</span>
           </div>
-          <div className="my-auto flex flex-col items-center gap-[4px]">
-            <div className="h-px w-[60%] bg-[#c8f14f] relative">
-              <span className="absolute -top-[5px] left-0 h-[11px] w-[2px] bg-[#c8f14f]" />
-              <span className="absolute -top-[5px] right-0 h-[11px] w-[2px] bg-[#c8f14f]" />
+          <div className="my-auto flex flex-col items-center gap-[6px]">
+            <div className="flex items-center gap-[10px]">
+              <span className="rounded border border-white/20 bg-black/50 px-[8px] py-[3px] font-mono text-[9px] text-[#c8f14f]">
+                IN 00:01:04.12
+              </span>
+              <span className="text-[var(--accent)] font-mono text-[11px] font-bold">✂ SPLICE</span>
+              <span className="rounded border border-white/20 bg-black/50 px-[8px] py-[3px] font-mono text-[9px] text-[#c8f14f]">
+                OUT 00:08:19.04
+              </span>
             </div>
-            <span className="font-mono text-[10px] tracking-wider text-white">CUT DURATION: 07.25s</span>
+            <div className="h-[2px] w-[200px] bg-white/20 relative rounded-full overflow-hidden">
+              <div className="h-full bg-[var(--accent)] w-[65%]" />
+            </div>
+            <span className="font-mono text-[9px] text-white/90 tracking-wide">
+              PACE MATCHED TO VOCAL CADENCE & MUSIC BEAT
+            </span>
           </div>
-          <div className="font-mono text-[9px] text-[#a1a1aa]">RHYTHM: FAST PACING MATCHED</div>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#a1a1aa]">
+            <span>CUT DURATION: 07.25s</span>
+            <span>AUDIO J-CUT / L-CUT SYNCED</span>
+          </div>
         </div>
 
         {/* State 3: MOTION */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150 overflow-hidden"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200 overflow-hidden"
           style={{
             opacity: stageIndex === 3 ? 1 : 0,
-            background: "linear-gradient(135deg, #26272c 0%, #121316 100%)",
+            background: "radial-gradient(circle at 50% 50%, #20222a 0%, #0c0d12 100%)",
           }}
         >
-          <div className="flex justify-between items-start font-mono text-[9px] text-white">
-            <span>GRAPHICS / ACCENT</span>
-            <span style={{ color: "var(--accent-ink)" }}>KINETIC PASS</span>
+          <div className="flex justify-between items-start font-mono text-[9px]">
+            <span className="text-white">KINETIC MOTION ENGINE</span>
+            <span style={{ color: "var(--accent)" }}>SMOOTH CUBIC-OUT</span>
           </div>
           <div className="my-auto flex flex-col items-center">
-            <div className="relative border border-dashed border-[#c8f14f] px-[16px] py-[8px] rounded">
-              <span className="font-mono text-[12px] font-bold tracking-widest text-white">
+            <div className="relative border-2 border-dashed border-[#c8f14f] bg-[#c8f14f]/5 px-[20px] py-[10px] rounded-[4px] shadow-[0_0_20px_rgba(200,241,79,0.15)]">
+              <span className="font-mono text-[13px] font-bold tracking-widest text-white">
                 PUNCH IN // 115%
               </span>
-              <span className="absolute -top-[3px] -left-[3px] h-[6px] w-[6px] bg-[#c8f14f]" />
-              <span className="absolute -bottom-[3px] -right-[3px] h-[6px] w-[6px] bg-[#c8f14f]" />
+              <span className="absolute -top-[4px] -left-[4px] h-[8px] w-[8px] bg-[#c8f14f] rounded-full" />
+              <span className="absolute -top-[4px] -right-[4px] h-[8px] w-[8px] bg-[#c8f14f] rounded-full" />
+              <span className="absolute -bottom-[4px] -left-[4px] h-[8px] w-[8px] bg-[#c8f14f] rounded-full" />
+              <span className="absolute -bottom-[4px] -right-[4px] h-[8px] w-[8px] bg-[#c8f14f] rounded-full" />
             </div>
+            <span className="mt-[8px] font-mono text-[8.5px] text-[var(--accent)] tracking-wider">
+              KEYFRAMES: (0.16, 1, 0.3, 1) · SPEED RAMP
+            </span>
           </div>
-          <div className="font-mono text-[9px] text-[#71717a]">EASE: CUBIC-OUT 320ms</div>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#71717a]">
+            <span>TRANSITION: SEAMLESS WHIP</span>
+            <span>MOTION BLUR: 180° SHUTTER</span>
+          </div>
         </div>
 
         {/* State 4: CAPTIONS */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
           style={{
             opacity: stageIndex === 4 ? 1 : 0,
-            background: "linear-gradient(135deg, #202227 0%, #101114 100%)",
+            background: "linear-gradient(135deg, #1b1d22 0%, #0a0b0e 100%)",
           }}
         >
           <div className="flex justify-between items-start font-mono text-[9px] text-[#a1a1aa]">
-            <span>SUBTITLES: AUTO-SYNC</span>
-            <span style={{ color: "var(--accent-ink)" }}>ACCURACY 99.4%</span>
+            <span className="text-white">DYNAMIC SOCIAL SUBTITLES</span>
+            <span style={{ color: "var(--accent)" }}>AI ACCURACY 99.8%</span>
           </div>
-          <div className="my-auto text-center">
-            <span className="inline-block rounded bg-black/85 px-[10px] py-[4px] font-sans text-[13px] font-medium tracking-tight text-white border border-white/10 shadow-lg">
-              “Systems that turn ideas into <span style={{ color: "var(--accent)" }}>leverage</span>.”
+          <div className="my-auto text-center flex flex-col items-center gap-[8px]">
+            <span className="inline-block rounded-[4px] bg-black/90 px-[14px] py-[6px] font-sans text-[14px] font-bold tracking-tight text-white border border-white/20 shadow-2xl">
+              “Systems that turn ideas into <span className="text-[#0c0c0d] bg-[var(--accent)] px-[6px] py-[1px] rounded shadow-[0_0_12px_rgba(200,241,79,0.5)]">leverage</span>.”
             </span>
-          </div>
-          <div className="font-mono text-[9px] text-[#71717a]">FORMAT: WORD-BY-WORD POP</div>
-        </div>
-
-        {/* State 5: GRADE */}
-        <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
-          style={{
-            opacity: stageIndex === 5 ? 1 : 0,
-            background: "linear-gradient(135deg, #293022 0%, #131710 100%)",
-            boxShadow: "inset 0 0 40px rgba(200, 241, 79, 0.08)",
-          }}
-        >
-          <div className="flex justify-between items-start font-mono text-[9px] text-[#c8f14f]">
-            <span>COLOR LUT: ARCHE FILM</span>
-            <span>GAMMA 2.4</span>
-          </div>
-          <div className="my-auto text-center">
-            <div className="inline-flex items-center gap-[6px] rounded-full border border-[#c8f14f]/40 bg-[#c8f14f]/10 px-[12px] py-[4px]">
-              <span className="h-[6px] w-[6px] rounded-full bg-[#c8f14f]" />
-              <span className="font-mono text-[10px] text-[#c8f14f] tracking-wider uppercase">
-                WARM TONE + ACID ACCENTS
+            <div className="flex items-center gap-[4px]">
+              <span className="h-[2px] w-[18px] bg-[var(--accent)]" />
+              <span className="font-mono text-[8.5px] text-[#a1a1aa] uppercase tracking-wider">
+                AUTO-TIMED WORD-BY-WORD POP
               </span>
+              <span className="h-[2px] w-[18px] bg-[var(--accent)]" />
             </div>
           </div>
-          <div className="font-mono text-[9px] text-[#a1a1aa]">CURVES: HIGHLIGHT ROLL-OFF APPLIED</div>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#71717a]">
+            <span>READABILITY OPTIMIZED</span>
+            <span>MOBILE SAFE ZONE COMPLIANT</span>
+          </div>
+        </div>
+
+        {/* State 5: GRADE (Split Wipe Before/After) */}
+        <div
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
+          style={{
+            opacity: stageIndex === 5 ? 1 : 0,
+            background: "linear-gradient(90deg, #141518 0%, #141518 48%, #1f2715 48%, #2d381c 100%)",
+            boxShadow: "inset 0 0 50px rgba(200, 241, 79, 0.12)",
+          }}
+        >
+          <div className="flex justify-between items-start font-mono text-[9px] z-10">
+            <span className="text-white/60">BEFORE: FLAT LOG</span>
+            <span className="text-[#c8f14f] font-bold">AFTER: ARCHE 35MM FILM</span>
+          </div>
+
+          {/* Split divider visual */}
+          <div className="absolute inset-y-0 left-[48%] w-[2px] bg-[var(--accent)] shadow-[0_0_12px_rgba(200,241,79,0.8)] z-10 flex items-center justify-center">
+            <div className="h-[20px] w-[20px] rounded-full bg-[var(--accent)] text-[#0c0c0d] flex items-center justify-center text-[10px] font-bold shadow-lg">
+              ⬌
+            </div>
+          </div>
+
+          <div className="my-auto z-10 flex justify-between items-center px-[10px]">
+            <div className="text-left font-mono text-[8.5px] text-[#8e8e93]">
+              <div>DESATURATED</div>
+              <div>FLAT CONTRAST</div>
+            </div>
+            <div className="text-right font-mono text-[8.5px] text-[#c8f14f]">
+              <div className="font-bold">RICH HIGHLIGHT ROLLOFF</div>
+              <div>FILM GRAIN + WARM BLACKS</div>
+            </div>
+          </div>
+
+          <div className="flex justify-between font-mono text-[8.5px] text-[#a1a1aa] z-10">
+            <span>LUT: ARCHE MASTER KODAK 5219</span>
+            <span className="text-[#c8f14f]">DCI-P3 WIDE COLOR GAMUT</span>
+          </div>
         </div>
 
         {/* State 6: EXPORT */}
         <div
-          className="absolute inset-0 flex flex-col justify-between p-[14px] transition-opacity duration-150"
+          className="absolute inset-0 flex flex-col justify-between p-[16px] transition-opacity duration-200"
           style={{
             opacity: stageIndex === 6 ? 1 : 0,
-            background: "linear-gradient(135deg, #1c2214 0%, #0d1108 100%)",
+            background: "radial-gradient(circle at 50% 50%, #1c2612 0%, #0a0e08 100%)",
           }}
         >
           <div className="flex justify-between items-start font-mono text-[9px] text-[#c8f14f]">
-            <span>RENDER FINISHED</span>
-            <span>100% COMPLETE</span>
+            <span className="font-bold">RENDER PIPELINE 100%</span>
+            <span>BITRATE: 45 MBPS</span>
           </div>
-          <div className="my-auto flex flex-col items-center gap-[8px]">
-            <div className="flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[#c8f14f] text-[#0c0c0d] font-bold text-[18px]">
+          <div className="my-auto flex flex-col items-center gap-[6px]">
+            <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-[#c8f14f] text-[#0c0c0d] font-bold text-[20px] shadow-[0_0_24px_rgba(200,241,79,0.5)]">
               ✓
             </div>
-            <span className="font-mono text-[11px] tracking-widest text-white uppercase">
-              MASTER READY FOR RELEASE
+            <span className="font-mono text-[12px] font-bold tracking-widest text-white uppercase">
+              MASTER READY FOR DISTRIBUTION
+            </span>
+            <span className="font-mono text-[8.5px] text-[#c8f14f]/80">
+              OPTIMIZED FOR YOUTUBE 4K, TIKTOK, REELS & BROADCAST
             </span>
           </div>
-          <div className="flex justify-between font-mono text-[9px] text-[#c8f14f]/80">
-            <span>MP4 H.265 / 4K</span>
-            <span>SIZE: 142 MB</span>
+          <div className="flex justify-between font-mono text-[8.5px] text-[#c8f14f]/90">
+            <span>APPLE PRORES 422 HQ / H.265</span>
+            <span>AUDIO: 24-BIT 48KHZ LPCM</span>
           </div>
         </div>
       </div>
