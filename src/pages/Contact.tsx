@@ -240,11 +240,10 @@ export function ContactPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       onBlur={() => setTouched((p) => ({ ...p, name: true }))}
-                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${
-                        touched.name && !isNameValid
+                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.name && !isNameValid
                           ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                           : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
-                      }`}
+                        }`}
                     />
                     {touched.name && !isNameValid && (
                       <span className="font-mono text-[10px] text-[#ff5c5c] block">
@@ -266,11 +265,10 @@ export function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onBlur={() => setTouched((p) => ({ ...p, email: true }))}
-                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${
-                        touched.email && !isEmailValid
+                      className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 ${touched.email && !isEmailValid
                           ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                           : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
-                      }`}
+                        }`}
                     />
                     {touched.email && !isEmailValid && (
                       <span className="font-mono text-[10px] text-[#ff5c5c] block">
@@ -309,11 +307,10 @@ export function ContactPage() {
                         value={service}
                         onChange={(e) => setService(e.target.value)}
                         onBlur={() => setTouched((p) => ({ ...p, service: true }))}
-                        className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] focus:outline-none focus:ring-1 appearance-none cursor-pointer ${
-                          touched.service && !isServiceValid
+                        className={`w-full rounded-[6px] border bg-[var(--bg)] px-[14px] py-[11px] text-[14px] text-[var(--fg)] focus:outline-none focus:ring-1 appearance-none cursor-pointer ${touched.service && !isServiceValid
                             ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                             : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
-                        }`}
+                          }`}
                       >
                         <option value="" disabled>Select a vertical…</option>
                         {SERVICE_OPTIONS.map((opt) => (
@@ -348,11 +345,10 @@ export function ContactPage() {
                     value={projectDetails}
                     onChange={(e) => setProjectDetails(e.target.value)}
                     onBlur={() => setTouched((p) => ({ ...p, projectDetails: true }))}
-                    className={`w-full rounded-[6px] border bg-[var(--bg)] p-[14px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 leading-relaxed ${
-                      touched.projectDetails && !isDetailsValid
+                    className={`w-full rounded-[6px] border bg-[var(--bg)] p-[14px] text-[14px] text-[var(--fg)] placeholder-[var(--muted)]/50 focus:outline-none focus:ring-1 leading-relaxed ${touched.projectDetails && !isDetailsValid
                         ? "border-[#ff5c5c] focus:ring-[#ff5c5c]"
                         : "border-[var(--line)] focus:border-[var(--accent-deep)] focus:ring-[var(--accent)]"
-                    }`}
+                      }`}
                   />
                   {touched.projectDetails && !isDetailsValid && (
                     <span className="font-mono text-[10px] text-[#ff5c5c] block">

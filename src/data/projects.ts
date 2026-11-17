@@ -1,5 +1,3 @@
-import { media } from "./media";
-
 export type Project = {
   slug: string;
   n: string;
@@ -32,7 +30,7 @@ export const projects: Project[] = [
     scope: ["Short-form", "Grading", "Captions"],
     summary:
       "A short-form editing pipeline: selection scan, rhythm pass, caption system and grade — the same sequence applied to every edit.",
-    img: media["w-04"],
+    img: "/work/04.jpg",
     ratio: "wide",
   },
   {
@@ -46,7 +44,7 @@ export const projects: Project[] = [
     scope: ["Long-form", "Structure", "Sound"],
     summary:
       "A talk recording restructured into a narrative edit — cold open, chapter logic, and a cutdown derived from the same timeline.",
-    img: media["w-02"],
+    img: "/work/02.jpg",
     ratio: "tall",
   },
   {
@@ -60,7 +58,7 @@ export const projects: Project[] = [
     scope: ["Design", "Build", "Motion"],
     summary:
       "This website — a data-driven, motion-heavy single-bundle build with route transitions, a reveal grammar and a guided inquiry flow with a direct-email fallback.",
-    img: media["w-01"],
+    img: "/work/01.jpg",
     ratio: "wide",
   },
   {
@@ -74,7 +72,7 @@ export const projects: Project[] = [
     scope: ["Landing", "Copy structure", "Speed"],
     summary:
       "A reusable landing-page system: one narrative spine, one conversion path and a reusable interface structure — restyled per engagement.",
-    img: media["w-03"],
+    img: "/work/03.jpg",
     ratio: "square",
   },
   {
@@ -88,7 +86,7 @@ export const projects: Project[] = [
     scope: ["Automation", "Classification", "CRM"],
     summary:
       "A prototype intake pipeline: inbound requests classified, enriched and routed automatically — with a human fallback path for edge cases.",
-    img: media["w-07"],
+    img: "/work/07.jpg",
     ratio: "wide",
   },
   {
@@ -102,7 +100,7 @@ export const projects: Project[] = [
     scope: ["Data", "Summaries", "Scheduling"],
     summary:
       "A workflow that assembles the weekly report nobody wanted to build by hand: pulls the numbers, drafts the summary, ships it on schedule.",
-    img: media["w-06"],
+    img: "/work/06.jpg",
     ratio: "tall",
   },
   {
@@ -116,7 +114,7 @@ export const projects: Project[] = [
     scope: ["Support", "RAG", "Escalation"],
     summary:
       "A support agent grounded in real documentation — answers with sources, refuses when unsure, escalates with the full conversation attached.",
-    img: media["w-05"],
+    img: "/work/05.jpg",
     ratio: "square",
   },
   {
@@ -130,7 +128,7 @@ export const projects: Project[] = [
     scope: ["Leads", "Scoring", "Handoff"],
     summary:
       "A conversational intake that asks the questions a good salesperson would, scores the fit, and books qualified leads directly.",
-    img: media["w-08"],
+    img: "/work/08.jpg",
     ratio: "wide",
   },
 ];

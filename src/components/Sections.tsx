@@ -1173,127 +1173,30 @@ function ProcessVisual({ active, compact = false }: { active: number; compact?: 
 }
 
 /* ================================================================
-   FINAL CTA (Prompt 18) — The Convergence Moment.
-   The one time the site uses true multi-object convergence: echoes of
-   earlier motifs (a Problem status card, a Service tab icon, a 3D node
-   fragment, the lime signal dot) drift in from the viewport edges,
-   merge into a single bright lime point, and that point expands outward
-   into the resting node/line graphic as the headline appears.
-   Plays once on entry (~1.9s). Mobile: the converged graphic is
-   pre-arranged and simply settles in — light entrance only.
+   FINAL CTA: "Let's build what actually connects."
    ================================================================ */
-const FC_MOTIFS = [
-  { label: "STATUS", from: [-320, -210], icon: "status" },
-  { label: "SERVICE", from: [300, -230], icon: "tab" },
-  { label: "NODE", from: [340, 200], icon: "node" },
-  { label: "SIGNAL", from: [-290, 230], icon: "signal" },
-];
-
-const FC_NODES = [
-  { k: "Website", x: 16, y: 20 },
-  { k: "AI Agent", x: 84, y: 18 },
-  { k: "Automation", x: 86, y: 80 },
-  { k: "Content", x: 14, y: 82 },
-];
-
-/* Index-safe accessors: the section renders two sets of .fc-line (desktop
-   graphic + mobile static graphic), so a bare ".fc-line" selector can hand
-   GSAP more targets than there are nodes. Never let a missing index throw
-   inside a tween — that would abort the whole timeline every frame. */
-const fcNode = (i: number) => FC_NODES[i] ?? FC_NODES[((i % FC_NODES.length) + FC_NODES.length) % FC_NODES.length];
-const fcX = (i: number) => fcNode(i).x;
-const fcY = (i: number) => fcNode(i).y;
-
 export function FinalCTA() {
   const c = siteContent.contact;
   const root = useRef<HTMLElement>(null);
-  const convergeCenterRef = useRef<HTMLSpanElement>(null);
 
   const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
   useEffect(() => onMotionPreferenceChange(setReducedMotion), []);
 
   useLayoutEffect(() => {
     if (!root.current || reducedMotion) return;
-    const desktop = window.matchMedia("(min-width: 900px)").matches;
 
     const ctx = gsap.context(() => {
-      if (!desktop) {
-        /* Mobile: composed graphic pre-arranged, light entrance only. */
-        gsap.set(".fc-static", { opacity: 0, y: 16 });
-        gsap.set(".fc-static .fc-line", { attr: { x2: 50, y2: 50 } });
-        gsap.set(".fc-text > *", { opacity: 0, y: 14 });
-        gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: "top 80%", once: true },
-        })
-          .to(".fc-static", { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" })
-          .to(".fc-static .fc-line", { attr: { x2: fcX, y2: fcY, duration: 0.6, ease: "power2.out" } }, 0.1)
-          .to(".fc-text > *", { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power3.out" }, 0.25);
-        gsap.set(".fc-motif, .fc-converge-point", { display: "none" });
-        return;
-      }
-
-      /* Desktop: the one true convergence. Plays once on entry.
-         Initial states are set explicitly, then the timeline only uses
-         .to() — no immediateRender ambiguity. */
-      gsap.set(".fc-motif", {
-        x: (i: number) => FC_MOTIFS[i].from[0],
-        y: (i: number) => FC_MOTIFS[i].from[1],
-        rotation: (i: number) => (i % 2 ? 10 : -10),
-        opacity: 0,
-        scale: 0.85,
-      });
-      gsap.set(convergeCenterRef.current, { scale: 0, opacity: 0 });
-      gsap.set(".fc-line-live", { attr: { x2: 50, y2: 50 }, opacity: 0 });
-      gsap.set(".fc-node", { opacity: 0, scale: 0.6 });
-      gsap.set(".fc-core", { opacity: 0, scale: 0.5 });
-      gsap.set(".fc-text > *", { opacity: 0, y: 18 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: root.current, start: "top 74%", once: true },
-      });
-
-      // 1 — echoes drift in from the edges toward center (~1s)
-      tl.to(
-        ".fc-motif",
-        {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.0,
-          ease: "power2.inOut",
-          stagger: 0.05,
-        },
-        0
-      );
-
-      // 2 — they merge into a single bright lime point
-      tl.to(".fc-motif", { scale: 0, opacity: 0, duration: 0.3, ease: "power3.in", stagger: 0.03 }, 1.0).to(
-        convergeCenterRef.current,
-        { scale: 1, opacity: 1, duration: 0.28, ease: "power2.out" },
-        1.12
-      );
-
-      // 3 — the point expands outward into the node/line graphic
-      tl.to(convergeCenterRef.current, { scale: 2.6, opacity: 0, duration: 0.5, ease: "power2.out" }, 1.42)
-        .to(
-          ".fc-line-live",
-          { attr: { x2: fcX, y2: fcY }, opacity: 0.7, duration: 0.45, ease: "power2.out", stagger: 0.04 },
-          1.46
-        )
-        .to(
-          ".fc-node",
-          { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)", stagger: 0.05 },
-          1.62
-        )
-        .to(".fc-core", { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 1.78);
-
-      // 4 — the headline settles in as the graphic reaches rest
-      tl.to(
+      gsap.fromTo(
         ".fc-text > *",
-        { opacity: 1, y: 0, duration: 0.65, stagger: 0.09, ease: "power3.out" },
-        1.62
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: { trigger: root.current, start: "top 78%", once: true },
+        }
       );
     }, root);
 
@@ -1302,78 +1205,6 @@ export function FinalCTA() {
 
   return (
     <section id="start" ref={root} className="on-ink relative w-full overflow-hidden py-[clamp(90px,12vw,180px)]">
-      {/* Convergence motifs — desktop only; mobile uses the static graphic */}
-      <div className="pointer-events-none absolute inset-0 hidden place-items-center lg:grid" aria-hidden>
-        {FC_MOTIFS.map((m) => (
-          <span
-            key={m.label}
-            className="fc-motif absolute inline-flex items-center gap-[6px] rounded-full border px-[10px] py-[5px]"
-            style={{
-              borderColor: m.icon === "signal" ? "var(--accent)" : "var(--line)",
-              background: m.icon === "signal" ? "var(--accent-deep)" : "var(--bg-2)",
-              color: m.icon === "signal" ? "#0c0c0d" : "var(--fg)",
-              top: "50%",
-              left: "50%",
-              translate: "-50% -50%",
-            }}
-          >
-            {m.icon === "signal" ? (
-              <span className="signal-dot" style={{ width: 6, height: 6 }} />
-            ) : (
-              <span className="block h-[6px] w-[6px] rounded-full" style={{ background: m.icon === "node" ? "var(--accent-deep)" : "var(--faint)" }} />
-            )}
-            <span className="mono text-[8px]">{m.label}</span>
-          </span>
-        ))}
-        {/* the single bright lime point the motifs merge into */}
-        <span
-          ref={convergeCenterRef}
-          className="fc-converge-point absolute top-1/2 left-1/2 block h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0"
-          style={{
-            background: "var(--accent)",
-            boxShadow: "0 0 30px var(--accent), 0 0 60px color-mix(in srgb, var(--accent-deep) 60%, transparent)",
-          }}
-        />
-      </div>
-
-      {/* resting node/line graphic — desktop: right column; mobile: static composed */}
-      <div className="pointer-events-none absolute top-[8%] right-[3%] bottom-[8%] hidden w-[42%] lg:block" aria-hidden>
-        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {FC_NODES.map((n) => (
-            <line key={n.k} className="fc-line fc-line-live" x1={n.x} y1={n.y} x2={50} y2={50} stroke="var(--accent-deep)" strokeWidth="1" vectorEffect="non-scaling-stroke" opacity=".7" />
-          ))}
-        </svg>
-        {FC_NODES.map((n) => (
-          <span key={n.k} className="fc-node mono absolute rounded-full border px-[12px] py-[6px]" style={{ left: `${n.x}%`, top: `${n.y}%`, translate: "-50% -50%", borderColor: "var(--line)", color: "var(--fg)", background: "var(--bg-2)" }}>
-            {n.k}
-          </span>
-        ))}
-        <div className="fc-core absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[10px] rounded-full px-[16px] py-[10px]" style={{ background: "var(--fg)", color: "var(--bg)" }}>
-          <span className="signal-dot" />
-          <span className="font-mono text-[11px] tracking-[.16em] uppercase">Arche</span>
-        </div>
-      </div>
-
-      {/* mobile composed graphic — pre-arranged, light entrance */}
-      <div className="wrap relative mb-[34px] lg:hidden" aria-hidden>
-        <div className="fc-static relative mx-auto aspect-[16/7] w-full max-w-[520px]">
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {FC_NODES.map((n) => (
-              <line key={n.k} className="fc-line" x1={n.x} y1={n.y} x2={50} y2={50} stroke="var(--accent-deep)" strokeWidth="1" vectorEffect="non-scaling-stroke" opacity=".7" />
-            ))}
-          </svg>
-          {FC_NODES.map((n) => (
-            <span key={n.k} className="mono absolute rounded-full border px-[9px] py-[4px] text-[8px]" style={{ left: `${n.x}%`, top: `${n.y}%`, translate: "-50% -50%", borderColor: "var(--line)", color: "var(--fg)", background: "var(--bg-2)" }}>
-              {n.k}
-            </span>
-          ))}
-          <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[8px] rounded-full px-[13px] py-[8px]" style={{ background: "var(--fg)", color: "var(--bg)" }}>
-            <span className="signal-dot" />
-            <span className="font-mono text-[10px] tracking-[.16em] uppercase">Arche</span>
-          </div>
-        </div>
-      </div>
-
       <div className="wrap fc-text relative flex flex-col items-start gap-[clamp(28px,4vw,52px)]">
         <div className="flex w-full items-center gap-[16px]">
           <span className="mono" style={{ color: "var(--accent-ink)" }}>
@@ -1381,11 +1212,11 @@ export function FinalCTA() {
           </span>
           <span className="h-px flex-1 origin-left" style={{ background: "var(--line)" }} data-r="line" />
         </div>
-        <h2 className="d1 max-w-[11ch] md:max-w-[9ch]">
+        <h2 className="d1 max-w-[14ch]">
           Let's build what actually connects.
         </h2>
-        <div className="flex flex-wrap items-center gap-[14px]">
-          <Link to="/contact" className="btn" cursor="START" data-magnetic style={{ background: "var(--fg)", color: "var(--bg)" }}>
+        <div className="flex flex-wrap items-center gap-[18px]">
+          <Link to="/contact" className="btn" data-cursor="START" data-magnetic style={{ background: "var(--fg)", color: "var(--bg)" }}>
             Start a Project <span className="arw">→</span>
           </Link>
           <a href={`mailto:${c.email}`} className="mono lnk" style={{ color: "var(--muted)" }}>

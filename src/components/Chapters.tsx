@@ -579,7 +579,7 @@ export function Chapters() {
 
               {/* Process Tags */}
               <div
-                className="flex flex-wrap items-center gap-x-[clamp(6px,0.9vw,10px)] gap-y-[8px]"
+                className="flex flex-wrap items-center gap-x-[clamp(6px,0.9vw,10px)] gap-y-[8px] pb-[clamp(12px,1.5vw,18px)]"
               >
                 {s.arc.map((a, k) => (
                   <span key={a} className="svc-tag-item flex items-center gap-[clamp(6px,0.9vw,10px)] flex-none">
