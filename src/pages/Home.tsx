@@ -31,7 +31,7 @@ import { resetPreviews } from "../lib/autoplay";
  */
 export function Home() {
   usePage(
-    "Arche Creative Studios — Technology Meets Creativity",
+    "Arche Creative Studios",
     "Arche Creative Studios is a creative technology and digital production studio delivering high-impact video editing, pitch decks, high-speed websites, and AI automations."
   );
   useReveal();
