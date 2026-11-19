@@ -146,8 +146,8 @@ export const INTENTS: Intent[] = [
     ],
     strongPhrases: ["how much", "what's the cost", "what does it cost", "pricing", "a quote"],
     response: [
-      "Some work has a defined package; custom work is quoted after a short conversation.",
-      "Scope, timeline and investment are agreed in writing before anything starts — no hourly drift.",
+      "Every project has transparent, fixed milestone pricing in INR (₹) — starting from ₹799 for Video Production, ₹3,999 for Pitch Decks, ₹7,999 for Web Development, and ₹5,999 for AI Solutions & Automation.",
+      "Check our dedicated /pricing page for all tier deliverables, turnarounds, and add-ons. Scope, timeline, and investment are agreed in writing before anything starts — no hourly drift.",
     ],
     trigger: "contact",
     followUps: ["How does a project work?", "How long does a project take?", "Start a project."],

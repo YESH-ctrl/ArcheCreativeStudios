@@ -123,7 +123,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
     return {
       lines: [
         "Every project is scoped individually with a written proposal and fixed milestones before work begins.",
-        "Starting investment guidelines: Video ($2,400/batch), Web Development ($3,500), AI Agents ($2,800), AI Automation ($1,800).",
+        "Starting investment guidelines (from our Pricing page): Video Production (from ₹799/video), Pitch Decks (from ₹3,999), Web Development (from ₹7,999), AI Automations (from ₹5,999), and Custom AI Agents (from ₹11,999).",
         "Which service would you like to scope for a detailed written quote?",
       ],
       trigger: "contact",
@@ -293,7 +293,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         timeline: "2–3 weeks to production readiness",
         seed: "automation",
         slug: "ai-solutions-automation",
-        startingPrice: "₹2,499",
+        startingPrice: "₹5,999",
       };
       return {
         lines: [
@@ -357,7 +357,7 @@ export function processDiscoveryTurn(rawInput: string, prevState: DiscoveryState
         timeline: "2–3 weeks",
         seed: "agent",
         slug: "ai-solutions-automation",
-        startingPrice: "₹3,999",
+        startingPrice: "₹11,999",
       };
       return {
         lines: [

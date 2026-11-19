@@ -7,7 +7,10 @@ import { useEffect, useRef, useState } from "react";
 
 /* ================= /services — services index ============ */
 export function ServicesIndex() {
-  usePage("Services | Arche Creative Studios");
+  usePage(
+    "Services & Capabilities | Arche Creative Studios",
+    "Arche builds connected digital systems: Video Production (from ₹799), Pitch Decks (from ₹3,999), Web Development (from ₹7,999), and AI Automations (from ₹5,999)."
+  );
   useReveal();
   useParallax();
 
@@ -88,7 +91,10 @@ function ServiceCard({ slug, flip }: { slug: string; flip: boolean }) {
 
 /* ================= /work — the portfolio index ====================== */
 export function WorkPage() {
-  usePage("Work | Arche Creative Studios");
+  usePage(
+    "Work & Labs | Arche Creative Studios",
+    "Explore Arche Labs: interactive prototypes, production case studies, and engineering architecture across video, pitch decks, web systems, and AI workflows."
+  );
   useReveal();
   useParallax();
 

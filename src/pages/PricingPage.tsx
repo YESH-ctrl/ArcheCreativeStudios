@@ -11,7 +11,10 @@ import { useReveal, useParallax } from "../lib/reveal";
 import { prefersReducedMotion } from "../lib/gsap";
 
 export function PricingPage() {
-  usePage("Pricing & Investment | ARCHE Creative Studios");
+  usePage(
+    "Pricing & Investment | ARCHE Creative Studios",
+    "Transparent, milestone-based pricing for video editing (from ₹799), pitch decks (from ₹3,999), web development (from ₹7,999), and AI automations (from ₹5,999)."
+  );
   useReveal();
   useParallax();
 
@@ -92,8 +95,8 @@ export function PricingPage() {
             <button
               onClick={() => setActiveVertical("all")}
               className={`chip ${activeVertical === "all"
-                  ? "border-[var(--accent)] bg-[var(--accent)] text-[#0c0c0d]"
-                  : ""
+                ? "border-[var(--accent)] bg-[var(--accent)] text-[#0c0c0d]"
+                : ""
                 }`}
             >
               All Verticals ({servicesData.length})
@@ -110,8 +113,8 @@ export function PricingPage() {
                   }
                 }}
                 className={`chip ${activeVertical === s.slug
-                    ? "border-[var(--accent)] bg-[var(--accent)] text-[#0c0c0d]"
-                    : ""
+                  ? "border-[var(--accent)] bg-[var(--accent)] text-[#0c0c0d]"
+                  : ""
                   }`}
               >
                 <span className="mono text-[10px] text-[var(--accent-ink)] mr-1">
@@ -445,8 +448,8 @@ function PricingCard({
   return (
     <div
       className={`relative flex flex-col justify-between rounded-[8px] border p-[clamp(20px,2.4vw,28px)] transition-all duration-300 hover:border-[var(--accent-deep)] ${pkg.popular
-          ? "border-[var(--accent)] bg-[var(--bg-2)] shadow-md"
-          : "border-[var(--line)] bg-[var(--bg)]"
+        ? "border-[var(--accent)] bg-[var(--bg-2)] shadow-md"
+        : "border-[var(--line)] bg-[var(--bg)]"
         }`}
     >
       {/* Popular badge */}

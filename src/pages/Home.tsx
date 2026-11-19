@@ -30,7 +30,10 @@ import { resetPreviews } from "../lib/autoplay";
  *  Start         fragments converge into Arche                       (L4)
  */
 export function Home() {
-  usePage("Arche Creative Studios");
+  usePage(
+    "Arche Creative Studios — Technology Meets Creativity",
+    "Arche Creative Studios is a creative technology and digital production studio delivering high-impact video editing, pitch decks, high-speed websites, and AI automations."
+  );
   useReveal();
   useParallax();
 

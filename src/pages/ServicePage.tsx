@@ -7,7 +7,7 @@ import { useReveal, useParallax } from "../lib/reveal";
 
 export function ServicePage({ slug }: { slug: string }) {
   const service = getServiceBySlug(slug);
-  usePage(service ? service.seo.title : "Service | ARCHE Creative Studios");
+  usePage(service ? service.seo.title : "Service | ARCHE Creative Studios", service?.seo.desc);
   useReveal();
   useParallax();
 
@@ -474,11 +474,10 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`relative flex flex-col justify-between rounded-[10px] border p-[clamp(20px,2.4vw,32px)] transition-all duration-300 shadow-sm ${
-        pkg.popular
+      className={`relative flex flex-col justify-between rounded-[10px] border p-[clamp(20px,2.4vw,32px)] transition-all duration-300 shadow-sm ${pkg.popular
           ? "border-[var(--accent-deep)] bg-[var(--card)] ring-1 ring-[var(--accent)]"
           : "border-[var(--line)] bg-[var(--card)] hover:border-[var(--line-strong,rgba(12,12,13,0.3))]"
-      }`}
+        }`}
     >
       {pkg.popular && (
         <span className="absolute -top-[11px] left-[24px] rounded-full bg-[var(--accent)] px-[10px] py-[2px] font-mono text-[9px] font-bold text-[#0c0c0d] tracking-wider uppercase shadow-sm">
@@ -552,9 +551,8 @@ function PricingCard({
       {/* CTA Button */}
       <button
         onClick={onSelect}
-        className={`btn mt-[24px] w-full justify-center ${
-          pkg.popular ? "" : "btn-ghost"
-        }`}
+        className={`btn mt-[24px] w-full justify-center ${pkg.popular ? "" : "btn-ghost"
+          }`}
         data-cursor="START"
       >
         Request This Package <span className="arw">→</span>

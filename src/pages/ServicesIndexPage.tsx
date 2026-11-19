@@ -6,7 +6,10 @@ import { Link, usePage } from "../lib/router";
 import { useReveal, useParallax } from "../lib/reveal";
 
 export function ServicesIndexPage() {
-  usePage("Services | ARCHE Creative Studios");
+  usePage(
+    "Services & Capabilities | ARCHE Creative Studios",
+    "Explore Arche's creative technology services: Video Production & Editing (from ₹799), Pitch Decks & Storytelling (from ₹3,999), Web Development (from ₹7,999), and AI Automations (from ₹5,999)."
+  );
   useReveal();
   useParallax();
 

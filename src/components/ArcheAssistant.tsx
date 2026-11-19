@@ -61,7 +61,7 @@ const CORE_SERVICES = [
     short: "AI & Automations",
     title: "AI Solutions & Automation",
     tagline: "Event-driven workflows, custom agents & CRM sync",
-    startingPrice: "From ₹2,499",
+    startingPrice: "From ₹5,999",
     query: "I want to automate my business workflow.",
   },
 ];

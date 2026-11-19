@@ -1,0 +1,37 @@
+# ====================================================================
+# ARCHE CREATIVE STUDIOS — robots.txt
+# Optimized for Web Search Crawlers & AI Answer Engines (AEO)
+# ====================================================================
+
+User-agent: *
+Allow: /
+Disallow: /downloads/private/
+
+# AI Search Crawlers & LLM Answer Engines (AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Canonical Sitemap & LLM Knowledge Specification
+Sitemap: https://archecreativestudios.com/sitemap.xml
+

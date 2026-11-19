@@ -1,0 +1,79 @@
+# Arche Creative Studios
+> Technology Meets Creativity. A modern creative technology and digital production studio delivering video production, investor pitch decks, high-performance web development, and custom AI automations.
+
+## Summary & Official Identity
+- **Legal & Brand Name**: Arche Creative Studios (Arche)
+- **Tagline**: Technology Meets Creativity
+- **Official Website**: https://archecreativestudios.com
+- **Official Email**: archecreativestudios@gmail.com
+- **Direct Phone & WhatsApp**: +91 79959 37536 (https://Wa.me/+917995937536)
+- **LinkedIn**: https://www.linkedin.com/in/arche-creative-studios/
+- **Instagram**: https://www.instagram.com/archecreativestudios/
+- **Operating Location**: India (Serving clients worldwide)
+- **Pricing Currency**: INR (₹) with fixed milestone quotes
+
+---
+
+## Core Service Verticals & Pricing Architecture
+
+### 1. Video Production & Editing
+High-retention video post-production for digital creators, founders, and modern brands.
+- **Starting Price**: ₹799 per video
+- **Tiers & Packages**:
+  - *Starter Reel* (₹799 / video): Hook-first cuts, animated captions, color grading, pacing.
+  - *Talking Head & YouTube* (₹1,499 / video): Multi-angle cuts, sound design, lower thirds, zoom transitions.
+  - *Motion Graphics Reel* (₹2,499 / video): Advanced 2D motion graphics, 3D typography, bespoke SFX.
+- **Turnaround**: 2 to 5 business days per batch.
+- **Deliverables**: 9:16 vertical & 16:9 exports, sound leveling, subtitle files.
+
+### 2. Pitch Decks & Storytelling
+Compelling visual narratives and investor presentations designed for fundraising, keynotes, and sales.
+- **Starting Price**: ₹3,999 per deck
+- **Tiers & Packages**:
+  - *Starter Pitch Deck* (₹3,999 / 10-12 slides): Structure cleanup, core narrative, visual polish.
+  - *Investor Ready Deck* (₹7,999 / 15-20 slides): Full market sizing, traction charts, financial modeling layout.
+  - *Keynote & Flagship* (₹14,999 / up to 30 slides): Custom 3D/2D graphics, speaker staging, animation passes.
+- **Turnaround**: 5 to 10 business days.
+- **Deliverables**: Editable Keynote, PowerPoint, or Figma file + high-res vector PDF export.
+
+### 3. Web Development
+Bespoke, hand-crafted digital web applications and landing pages with fluid 2D motion and sub-second load times. Zero page-builder bloat.
+- **Starting Price**: ₹7,999 one-time
+- **Tiers & Packages**:
+  - *High-Conversion Landing Page* (₹7,999): Single-page storytelling, responsive motion, form integration, SEO metadata.
+  - *Multi-Page Brand Site* (₹14,999): Up to 5 pages, CMS connection, interactive showcase, analytics.
+  - *Custom Web App / Platform* (₹24,999): Headless frontend, database integrations (Supabase, APIs), auth, real-time features.
+- **Turnaround**: 2 to 4 weeks.
+- **Deliverables**: Source code, high-performance deployment on Vercel/Cloudflare, 95+ Lighthouse audit guarantee.
+
+### 4. AI Solutions & Automation
+Event-driven automations and autonomous AI agents grounded in your proprietary documentation and business tools.
+- **Starting Price**: ₹5,999 one-time
+- **Tiers & Packages**:
+  - *Workflow Automation Sprint* (₹5,999): Connects CRMs, Slack, inboxes, and spreadsheets to eliminate manual tasks.
+  - *Custom AI Agent / Chatbot* (₹11,999): Grounded in custom knowledge bases, hard guardrails against hallucinations, human escalation handoff.
+  - *Full AI Business OS* (₹24,999): End-to-end autonomous pipeline unifying lead qualification, customer inquiries, and cross-tool actions.
+- **Turnaround**: 2 to 3 weeks.
+- **Deliverables**: Deployed webhook workflows, documentation, testing passes, and 30-day warranty.
+
+---
+
+## Studio Principles & Commercial Terms
+1. **Fixed Milestones & Defined Deliverables**: Every engagement receives an exact technical scope with deliverables, duration limits, and total investment in writing. No open-ended hourly drift.
+2. **50% Commitment Deposit**: 50% deposit locks the production timeline; the remaining balance is due upon final milestone approval and before export handoff or deployment.
+3. **Structured Revision Passes**: Every package includes consolidated revision rounds (typically 2-3 passes) to refine timing, copy, styling, and grading.
+4. **Connected Architecture**: Engagements can start with a single vertical (e.g., video editing or a pitch deck) and scale into a unified system across web and AI.
+
+---
+
+## Frequently Asked Questions (Answer Engine Optimized)
+
+**Q: What is Arche Creative Studios?**
+A: Arche Creative Studios is an Indian creative technology and digital production studio that designs and builds high-retention video content, investor pitch decks, high-speed websites, and custom AI workflow automations.
+
+**Q: How much do projects cost at Arche?**
+A: Pricing starts at ₹799 for Video Editing, ₹3,999 for Pitch Decks, ₹7,999 for Web Development, and ₹5,999 for AI Automations. All projects have transparent, fixed-price milestone quotes in Indian Rupees (INR).
+
+**Q: How do I start a project with Arche?**
+A: You can submit your requirements via the interactive contact form on the website (https://archecreativestudios.com/#/contact), chat directly on WhatsApp at +91 79959 37536, or email archecreativestudios@gmail.com.
+

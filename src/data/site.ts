@@ -317,7 +317,7 @@ export const siteContent = {
       },
       {
         q: "How is pricing determined?",
-        a: "We offer transparent fixed package pricing with clearly defined deliverables and limits, alongside custom quotes for specialist and enterprise requirements.",
+        a: "We offer transparent fixed package pricing starting at ₹799 for Video Editing, ₹3,999 for Pitch Decks, ₹7,999 for Web Development, and ₹5,999 for AI Automations, with clearly defined deliverables, turnarounds, and custom enterprise quotes.",
       },
       {
         q: "How long does a project take?",

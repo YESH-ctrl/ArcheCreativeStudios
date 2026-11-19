@@ -160,9 +160,17 @@ export function Link({
 /** Per-page boot: title, scroll reset, deferred ScrollTrigger refresh. */
 let firstPage = true;
 
-export function usePage(title: string) {
+export function usePage(title: string, description?: string) {
   useEffect(() => {
     document.title = title;
+    if (description) {
+      const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+      if (metaDesc) metaDesc.content = description;
+      const ogDesc = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
+      if (ogDesc) ogDesc.content = description;
+      const ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
+      if (ogTitle) ogTitle.content = title;
+    }
     window.scrollTo(0, 0);
     // After a route change the clicked link may have been unmounted, which
     // drops focus back to <body>. Always hand focus to the new landmark on
