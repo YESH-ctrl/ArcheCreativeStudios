@@ -15,6 +15,7 @@ node_modules/rollup/node_modules/
 .DS_Store
 *.log
 *.png
+!public/*.png
 !public/arche logo.png
 arche-preview*
 scripts/audit_artifacts/

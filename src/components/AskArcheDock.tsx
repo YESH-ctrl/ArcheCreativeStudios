@@ -53,7 +53,7 @@ export function AskArcheDock() {
         { label: "Start a Project →", href: "#/contact" },
         {
           label: "WhatsApp Partner Line →",
-          href: "https://wa.me/917995937536?text=Hi%20Arch%C3%A9%20Studio%2C%20I'd%20like%20to%20discuss%20a%20project",
+          href: "https://wa.me/917995937536?text=Hi%20Arche%20Creative%20Studios%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team.",
           isExternal: true,
         },
       ],
@@ -138,7 +138,7 @@ export function AskArcheDock() {
           { label: "Start a Project →", href: "#/contact" },
           {
             label: "Chat on WhatsApp →",
-            href: "https://wa.me/917995937536?text=Hi%20Arch%C3%A9%20Studio%2C%20I'd%20like%20to%20discuss%20a%20project",
+            href: "https://wa.me/917995937536?text=Hi%20Arche%20Creative%20Studios%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team.",
             isExternal: true,
           },
         ],
@@ -461,7 +461,7 @@ export function AskArcheDock() {
         <div className="flex items-center gap-1.5">
           {/* 1. WhatsApp Button (opens https://wa.me/917995937536) */}
           <a
-            href="https://wa.me/917995937536?text=Hello%20Arch%C3%A9%20Studio%2C%20I%20would%20like%20to%20discuss%20a%20project"
+            href="https://wa.me/917995937536?text=Hi%20Arche%20Creative%20Studios%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20your%20team."
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="hover"

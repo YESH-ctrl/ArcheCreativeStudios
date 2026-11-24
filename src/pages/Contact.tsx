@@ -167,30 +167,46 @@ export function ContactPage() {
     timeline: timeline ?? "1–3 Months",
   });
 
+  // WhatsApp automated kickoff message to 7995937536
+  const getWhatsAppBriefUrl = () => {
+    const waSummary = encodeURIComponent(
+      `*NEW PROJECT BRIEF — ARCHE CREATIVE STUDIOS*\n\n` +
+      `👤 *Name:* ${name.trim()}\n` +
+      `📧 *Email:* ${email.trim()}\n` +
+      (phone.trim() ? `📱 *Phone / WhatsApp:* ${phone.trim()}\n` : "") +
+      (company.trim() ? `🏢 *Company:* ${company.trim()}\n` : "") +
+      `⚙️ *Service / Capability:* ${build || "Full Connected System"}\n` +
+      `🎯 *Scope & Goals:* ${change.trim() || "General Inquiry"}\n` +
+      `⏱️ *Timeline:* ${timeline || "1–3 Months"}\n\n` +
+      `_Submitted via website brief at archecreativestudios.in_`
+    );
+    return `https://wa.me/917995937536?text=${waSummary}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSubmit || phase === "sending") return;
 
     setPhase("sending");
+    const waUrl = getWhatsAppBriefUrl();
+
     try {
       await submitInquiry(payload());
     } catch {
       /* Graceful fallback for local demo environments */
     }
+
+    // Automatically trigger WhatsApp redirect with the pre-filled message to 7995937536
+    try {
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+    } catch {
+      /* If popup is blocked, confirmation screen has the direct button */
+    }
+
     setPhase("received");
   };
 
-  // WhatsApp pre-filled direct handoff message
-  const waSummary = encodeURIComponent(
-    `Hi Arché, I just submitted a project brief on arche.studio:\n\n• Capability: ${
-      build || "Full Connected System"
-    }\n• Scope / Goal: ${change.trim() || "General Inquiry"}\n• Timeline: ${
-      timeline || "1–3 Months"
-    }\n• Lead: ${name.trim()} (${email.trim()})${
-      phone.trim() ? ` · WhatsApp: ${phone.trim()}` : ""
-    }${company.trim() ? ` · Company: ${company.trim()}` : ""}`
-  );
-  const waUrl = `https://wa.me/917995937536?text=${waSummary}`;
+  const waUrl = getWhatsAppBriefUrl();
 
   const resetForm = () => {
     setStep(0);
@@ -320,7 +336,7 @@ export function ContactPage() {
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
-                href="https://wa.me/917995937536"
+                href="https://wa.me/917995937536?text=Hi%20Arche%20Creative%20Studios%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20your%20team."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#9EE41A]/50 hover:bg-white/[0.08] transition-all text-[#F4F1E0] text-xs font-mono"
@@ -406,11 +422,10 @@ export function ContactPage() {
                             key={opt.id}
                             type="button"
                             onClick={() => chooseBuild(opt.id)}
-                            className={`group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${
-                              isSelected
+                            className={`group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${isSelected
                                 ? "bg-[#0B0C0A] text-[#F4F1E0] shadow-lg border border-[#0B0C0A]"
                                 : "bg-white/80 hover:bg-white text-[#0B0C0A] border border-[#141413]/12 hover:border-[#141413]/40 hover:-translate-y-0.5"
-                            }`}
+                              }`}
                           >
                             <div className="flex items-center justify-between mb-1.5">
                               <span className="font-mono text-xs font-bold uppercase tracking-wider">
@@ -427,9 +442,8 @@ export function ContactPage() {
                               )}
                             </div>
                             <p
-                              className={`text-[13.5px] font-medium leading-relaxed ${
-                                isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
-                              }`}
+                              className={`text-[13.5px] font-medium leading-relaxed ${isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
+                                }`}
                             >
                               {opt.desc}
                             </p>
@@ -446,11 +460,10 @@ export function ContactPage() {
                         <button
                           type="button"
                           onClick={() => chooseBuild(opt.id)}
-                          className={`w-full group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${
-                            isSelected
+                          className={`w-full group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${isSelected
                               ? "bg-[#0B0C0A] text-[#F4F1E0] shadow-lg border border-[#0B0C0A]"
                               : "bg-white/80 hover:bg-white text-[#0B0C0A] border border-[#141413]/12 hover:border-[#141413]/40 hover:-translate-y-0.5"
-                          }`}
+                            }`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#84CC16]">
@@ -467,9 +480,8 @@ export function ContactPage() {
                             )}
                           </div>
                           <p
-                            className={`text-[13.5px] font-medium leading-relaxed ${
-                              isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
-                            }`}
+                            className={`text-[13.5px] font-medium leading-relaxed ${isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
+                              }`}
                           >
                             {opt.desc}
                           </p>
@@ -571,11 +583,10 @@ export function ContactPage() {
                             key={opt.id}
                             type="button"
                             onClick={() => chooseTimeline(opt.id)}
-                            className={`group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${
-                              isSelected
+                            className={`group relative rounded-2xl p-4 sm:p-5 text-left transition-all duration-200 cursor-pointer ${isSelected
                                 ? "bg-[#0B0C0A] text-[#F4F1E0] shadow-lg border border-[#0B0C0A]"
                                 : "bg-white/80 hover:bg-white text-[#0B0C0A] border border-[#141413]/12 hover:border-[#141413]/40 hover:-translate-y-0.5"
-                            }`}
+                              }`}
                           >
                             <div className="flex items-center justify-between mb-1.5">
                               <span className="font-mono text-xs font-bold uppercase tracking-wider">
@@ -592,9 +603,8 @@ export function ContactPage() {
                               )}
                             </div>
                             <p
-                              className={`text-[13.5px] font-medium leading-relaxed ${
-                                isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
-                              }`}
+                              className={`text-[13.5px] font-medium leading-relaxed ${isSelected ? "text-[#CBD1C5]" : "text-[#1C1E1A]"
+                                }`}
                             >
                               {opt.hint}
                             </p>
@@ -714,7 +724,7 @@ export function ContactPage() {
                         arrow="right"
                         className="w-full !bg-[#141413] !text-[#F4F1E0] !border-[#141413] hover:!bg-[#222520] hover:!border-[#222520] hover:!shadow-[0_0_28px_rgba(20,20,19,0.45)] !h-[48px] !text-[13px] !font-bold disabled:opacity-50 disabled:pointer-events-none"
                       >
-                        {phase === "sending" ? "Dispatching Brief..." : "Send Project Brief"}
+                        {phase === "sending" ? "Dispatching Brief..." : "Submit Project Brief"}
                       </SlotButton>
                     </div>
 
@@ -778,7 +788,7 @@ export function ContactPage() {
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2.5 rounded-full py-3.5 px-6 bg-[#25D366] text-[#11120F] font-bold font-mono text-xs uppercase tracking-wider shadow-[0_0_24px_rgba(37,211,102,0.40)] hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer"
                   >
-                    <span>Send via WhatsApp too →</span>
+                    <span>Send to WhatsApp (+91 79959 37536) →</span>
                   </a>
 
                   <div>

@@ -210,7 +210,7 @@ export function ArcheConcierge({ className = "" }: { className?: string }) {
       <div className="bg-[#141413] text-[#FBFBF6] px-5 py-3.5 sm:px-6 sm:py-4 flex items-center justify-between border-b border-[#232620]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-[10px] bg-[#1E201B] border border-[#9EE41A]/30 flex items-center justify-center flex-shrink-0 shadow-sm">
-            <AcMonogram className="w-5 h-5 text-[#FBFBF6]" />
+            <AcMonogram size={18} onDark={true} className="flex-shrink-0" />
           </div>
           <div>
             <div className="flex items-center gap-2">
